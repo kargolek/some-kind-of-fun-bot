@@ -1,5 +1,11 @@
 name: "Make a war"
 
+env:
+  ####### ENV VARS #######
+  SEC_PHRASE: ${{ secrets.SEC_PHRASE }}
+  SEC_PASSWORD: ${{ secrets.SEC_PASSWORD }}
+
+
 on:
   push:
     branches: [ "main" ]
