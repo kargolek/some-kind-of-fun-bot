@@ -52,6 +52,8 @@ public class WebDriverFactory {
                 case LOCAL_CHROME -> {
                     System.out.println("Im running");
                     ChromeOptions chromeOptions = (ChromeOptions) getOptions();
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
                     chromeOptions.addArguments("--lang=en");
                     chromeOptions.addExtensions(new File("chrome_extension/10.34.5_0.crx"));
                     return getLocalWebDriver(chromeOptions);
