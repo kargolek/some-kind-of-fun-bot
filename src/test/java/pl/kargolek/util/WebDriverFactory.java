@@ -54,6 +54,8 @@ public class WebDriverFactory {
                     ChromeOptions chromeOptions = (ChromeOptions) getOptions();
                     chromeOptions.addArguments("--no-sandbox");
                     chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--profile-directory=Default");
+                    chromeOptions.addArguments("--user-data-dir=~/.config/google-chrome");
                     chromeOptions.addArguments("--lang=en");
                     chromeOptions.addExtensions(new File("chrome_extension/10.34.5_0.crx"));
                     return getLocalWebDriver(chromeOptions);
