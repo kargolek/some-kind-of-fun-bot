@@ -20,26 +20,11 @@ jobs:
           distribution: 'adopt'
           cache: 'maven'
 
-      - uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-        id: setup-chrome
-      - run: |
-          echo Installed chromium version: ${{ steps.setup-chrome.outputs.chrome-version }}
-          ${{ steps.setup-chrome.outputs.chrome-path }} --version
-          
-      - uses: actions/checkout@v2
-      - uses: nanasess/setup-chromedriver@v2
-        with:
-          # Optional: do not specify to match Chrome's version
-          chromedriver-version: '116.0.5845.110-1'
-      - run: |
-          export DISPLAY=:99
-          chromedriver --url-base=/wd/hub &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+      - name: Start selenium grid
+        run: docker-compose -f selenium-compose.yaml up -d
 
       - name: Build and run
-        run: mvn test -Dbrowser='local-chrome'
+        run: mvn test -Dbrowser='chrome'
 
       - name: Upload screenshot
         if: always()
