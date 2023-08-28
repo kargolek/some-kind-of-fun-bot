@@ -1,4 +1,4 @@
-# sparta-dex-war-bot
+# some-kind-of-fun-bot
 
 ## Description
 
