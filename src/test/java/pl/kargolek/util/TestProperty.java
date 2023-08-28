@@ -49,4 +49,16 @@ public class TestProperty {
         return System.getenv("SEC_PASSWORD");
     }
 
+    public String getGameURL(){
+        return System.getenv("SEC_GAME_URL");
+    }
+
+    public String getGameCampURL(){
+        return System.getenv("SEC_GAME_URL_CAMP");
+    }
+
+    public String getGameOpponentsCampURL(){
+        return System.getenv("SEC_GAME_URL_OPPONENTS_CAMP");
+    }
+
 }

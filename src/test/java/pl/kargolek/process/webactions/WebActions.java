@@ -3,6 +3,7 @@ package pl.kargolek.process.webactions;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
+import pl.kargolek.util.TestProperty;
 import pl.kargolek.util.WebDriverUtil;
 
 @Slf4j
@@ -19,13 +20,13 @@ abstract class WebActions {
         WebDriverUtil.refreshPage(initPages.driver());
     }
 
-    public void tabSwitchToMetamask() {
-        log.info("Switch to metamask tab");
+    public void tabSwitchToWallet() {
+        log.info("Switch to wallet tab");
         WebDriverUtil.switchToNextTab(initPages.driver(), "chrome-extension://", 5000);
     }
 
-    public void tabSwitchToSpartaDex() {
-        log.info("Switch to spartadex tab");
-        WebDriverUtil.switchToNextTab(initPages.driver(), "app.spartadex.io", 5000);
+    public void tabSwitchToGame() {
+        log.info("Switch to game tab");
+        WebDriverUtil.switchToNextTab(initPages.driver(), TestProperty.getInstance().getGameURL(), 5000);
     }
 }

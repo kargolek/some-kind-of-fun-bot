@@ -31,12 +31,3 @@ jobs:
 
       - name: Build and run
         run: mvn test -Dbrowser='chrome'
-
-      - name: Upload screenshot
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: screenshot
-          path: ./screenshots/
-          retention-days: 5
-          if-no-files-found: error
