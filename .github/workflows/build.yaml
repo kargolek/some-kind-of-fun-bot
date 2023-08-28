@@ -4,7 +4,9 @@ env:
   ####### ENV VARS #######
   SEC_PHRASE: ${{ secrets.SEC_PHRASE }}
   SEC_PASSWORD: ${{ secrets.SEC_PASSWORD }}
-
+  SEC_GAME_URL: ${{ secrets.SEC_GAME_URL }}
+  SEC_GAME_URL_CAMP: ${{ secrets.SEC_GAME_URL_CAMP }}
+  SEC_GAME_URL_OPPONENTS_CAMP: ${{ secrets.SEC_GAME_URL_OPPONENTS_CAMP }}
 
 on:
   push:
