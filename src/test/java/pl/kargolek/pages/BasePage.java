@@ -66,6 +66,17 @@ public class BasePage {
         return elementsArray;
     }
 
+    public List<WebElement> waitForElementsVisibilityIgnoreTimeout(By locator, Duration timeout) {
+        List<WebElement> elementsArray = new ArrayList<>();
+        try {
+            elementsArray = new WebDriverWait(this.driver, timeout)
+                    .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+        } catch(TimeoutException e){
+            log.info("Timeout occurs, ignoring it. Element: " + locator);
+        }
+        return elementsArray;
+    }
+
     public List<WebElement> waitForElementAllVisibility(By locator, Duration timeout) {
         return new WebDriverWait(this.driver, timeout).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }

@@ -35,7 +35,8 @@ public class YourCampDetailPage extends BaseDetailViewPage {
                 .getText();
     }
 
-    public YourCampDetailPage clickRecruitButton(Soldier soldier) {
+    public YourCampDetailPage clickRecruitButton(Soldier soldier) throws InterruptedException {
+        Thread.sleep(500);
         var element = waitForElementVisibility(By.xpath(String.format(recruitSoldierButton, soldier)),
                 getTimeoutDefault());
         if (element.isEnabled())

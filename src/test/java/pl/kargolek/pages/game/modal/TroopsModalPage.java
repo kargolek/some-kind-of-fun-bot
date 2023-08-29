@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import pl.kargolek.pages.BasePage;
 
+import java.time.Duration;
+
 public class TroopsModalPage extends BasePage {
 
     private final By maxButton = RelativeLocator
@@ -21,13 +23,13 @@ public class TroopsModalPage extends BasePage {
     }
 
     public TroopsModalPage clickAllMaxButtons(){
-        waitForElementAllVisibility(maxButton, getTimeoutDefault())
+        waitForElementsVisibilityIgnoreTimeout(maxButton, Duration.ofSeconds(7))
                 .forEach(WebElement::click);
         return this;
     }
 
     public TroopsModalPage clickAttackButton(){
-        waitForElementClickable(attackButton, getTimeoutDefault())
+        waitForElementVisibility(attackButton, Duration.ofSeconds(7))
                 .click();
         return this;
     }

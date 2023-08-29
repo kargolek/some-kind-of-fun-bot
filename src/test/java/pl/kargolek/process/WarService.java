@@ -17,32 +17,21 @@ public class WarService {
 
     public void prepareUnitsAttack() throws InterruptedException {
         yourCampActions.claimSoldiers();
+
         var yourCampDetailPage = gameActions.openYourCamp();
         var yourCampSlots = MapData.mapCampSlots(yourCampDetailPage.getSlotsOccupiedText());
         var diff = yourCampSlots.getMaxSlots() - yourCampSlots.getAvailableSlots();
         log.info("Max and available slots diff = {} barracks slots: {}", diff, yourCampSlots);
-        if (diff > 0) {
-            log.info("Starting recruiting soldiers");
+
+        if (diff > 2) {
+            log.info("Need to recruit soldiers");
             yourCampActions.recruitSoldiers();
         } else {
-            log.info("Verifying attack possibility");
-            verifyUnitProcess(yourCampSlots);
+            log.info("We can attack opponents");
+            opponentsCampActions.attackOpponentsCamp();
+            yourCampActions.recruitSoldiers();
         }
 
         gameActions.openGameLogExperienceInfo();
-    }
-
-    private void verifyUnitProcess(CampSlots campSlots) {
-        for (int i = 0; i <= 1; i++) {
-            var isMaxUnit = yourCampActions.sumUnits().equals(campSlots.getMaxSlots());
-            if (isMaxUnit) {
-                opponentsCampActions.attackOpponentsCamp();
-                yourCampActions.recruitSoldiers();
-                break;
-            } else {
-                if (i == 1)
-                    yourCampActions.recruitSoldiers();
-            }
-        }
     }
 }

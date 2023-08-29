@@ -11,7 +11,7 @@ public class YourCampActions extends WebActions {
         super(initPages);
     }
 
-    public void recruitSoldiers() {
+    public void recruitSoldiers() throws InterruptedException {
         tabSwitchToGame();
         log.info("Recruit soldiers");
         initPages.getYourCampDetailPage()
@@ -20,6 +20,8 @@ public class YourCampActions extends WebActions {
                 .clickRecruitButton(Soldier.Cavalry)
                 .clickMaxButton(Soldier.Hoplite)
                 .clickRecruitButton(Soldier.Hoplite)
+                .clickMaxButton(Soldier.Archer)
+                .clickRecruitButton(Soldier.Archer)
                 .clickMaxButton(Soldier.Slinger)
                 .clickRecruitButton(Soldier.Slinger)
                 .clickMaxButton(Soldier.Acolyte)
@@ -38,7 +40,7 @@ public class YourCampActions extends WebActions {
                 .clickCloseModalButton();
     }
 
-    public Integer sumUnits() {
+    public Integer sumUnits() throws InterruptedException {
         tabSwitchToGame();
         log.info("Summarize all units");
         var yourCampDetailPage = initPages.getYourCampDetailPage()
@@ -50,7 +52,8 @@ public class YourCampActions extends WebActions {
         var hoplite = yourCampDetailPage.getAmountSoldierText(Soldier.Hoplite);
         var archer = yourCampDetailPage.getAmountSoldierText(Soldier.Archer);
         var cavalry = yourCampDetailPage.getAmountSoldierText(Soldier.Cavalry);
-
-        return militia + acolyte + slinger + hoplite + archer + cavalry;
+        var sumUnits = militia + acolyte + slinger + hoplite + archer + cavalry;
+        log.info("Sum available units: {}", sumUnits);
+        return sumUnits;
     }
 }
