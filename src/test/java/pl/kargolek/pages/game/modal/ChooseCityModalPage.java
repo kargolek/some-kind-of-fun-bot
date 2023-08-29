@@ -18,7 +18,7 @@ public class ChooseCityModalPage extends BasePage {
     }
 
     public GameMainPage clickEnterCityButton() {
-        this.waitForElementClickable(this.enterCityButton, Duration.ofSeconds(10))
+        this.waitForElementClickable(this.enterCityButton, getTimeoutDefault())
                 .click();
         return new GameMainPage(this.driver);
     }

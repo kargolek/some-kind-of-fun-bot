@@ -13,6 +13,8 @@ services:
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       - SE_NODE_MAX_SESSIONS=2
       - SE_NODE_SESSION_TIMEOUT=60
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
   selenium_hub:
     image: selenium/hub:4.11.0
     container_name: selenium_hub
