@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith(WebDriverExtension.class)
 public @interface SeleniumWebDriver {
-    boolean isBeforeAll() default true;
+    boolean isBeforeAll() default false;
 }

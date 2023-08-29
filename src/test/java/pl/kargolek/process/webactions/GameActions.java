@@ -22,8 +22,9 @@ public class GameActions extends WebActions {
                 .clickWalletButton();
     }
 
-    public void openGameLogExperienceInfo(){
+    public void openGameLogExperienceInfo() throws InterruptedException {
         tabSwitchToGame();
+        Thread.sleep(2000);
         var experiencePanelPage = initPages.getGameMainPage()
                 .open()
                 .getExperiencePanelPage();

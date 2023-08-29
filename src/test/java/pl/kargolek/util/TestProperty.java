@@ -42,7 +42,7 @@ public class TestProperty {
     }
 
     public String getPhrase(){
-        return System.getenv("SEC_PHRASE");
+        return System.getenv("SEC_PHRASE_3");
     }
 
     public String getPassword(){

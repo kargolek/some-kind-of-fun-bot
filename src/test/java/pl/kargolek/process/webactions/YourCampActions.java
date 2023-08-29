@@ -16,6 +16,10 @@ public class YourCampActions extends WebActions {
         log.info("Recruit soldiers");
         initPages.getYourCampDetailPage()
                 .open()
+                .clickMaxButton(Soldier.Cavalry)
+                .clickRecruitButton(Soldier.Cavalry)
+                .clickMaxButton(Soldier.Hoplite)
+                .clickRecruitButton(Soldier.Hoplite)
                 .clickMaxButton(Soldier.Slinger)
                 .clickRecruitButton(Soldier.Slinger)
                 .clickMaxButton(Soldier.Acolyte)
