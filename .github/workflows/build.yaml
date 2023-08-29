@@ -32,4 +32,4 @@ jobs:
         run: docker-compose -f selenium-compose.yaml up -d
 
       - name: Build and run
-        run: mvn -T test -Dbrowser='chrome' "-Djunit.jupiter.execution.parallel.enabled=true"
+        run: mvn -T 2 test -Dbrowser='chrome' "-Djunit.jupiter.execution.parallel.enabled=true"
