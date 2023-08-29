@@ -29,8 +29,9 @@ public class TroopsModalPage extends BasePage {
     }
 
     public TroopsModalPage clickAttackButton(){
-        waitForElementVisibility(attackButton, Duration.ofSeconds(7))
-                .click();
+        var button = waitForElementVisibility(attackButton, Duration.ofSeconds(7));
+        if(button.isEnabled())
+            button.click();
         return this;
     }
 }
