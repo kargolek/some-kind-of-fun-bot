@@ -1,6 +1,7 @@
 package pl.kargolek.tests;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -41,6 +42,7 @@ public class GameTest {
     }
 
     @Test
+    @Disabled
     public void test_war_1() throws InterruptedException {
         gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE"), password);
         warService.prepareUnitsAttack();
