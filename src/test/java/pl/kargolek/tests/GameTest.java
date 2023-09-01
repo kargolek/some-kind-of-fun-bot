@@ -42,7 +42,6 @@ public class GameTest {
     }
 
     @Test
-    @Disabled
     public void test_war_1() throws InterruptedException {
         gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE"), password);
         warService.prepareUnitsAttack();
