@@ -1,5 +1,6 @@
 package pl.kargolek.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -15,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author Karol Kuta-Orlowicz
  */
+@Slf4j
 public class WebDriverUtil {
 
     /**
@@ -34,6 +36,7 @@ public class WebDriverUtil {
         while (true) {
             for (String window : driver.getWindowHandles()) {
                 driver.switchTo().window(window);
+                log.info(driver.getCurrentUrl());
                 if (driver.getCurrentUrl().contains(urlContains)) {
                     return;
                 }
@@ -59,7 +62,7 @@ public class WebDriverUtil {
         var imgElement = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         System.out.println(imgElement.getPath());
         try {
-            FileUtils.copyFile(imgElement, new File("screenshots/", screenshotName()));
+            FileUtils.copyFile(imgElement, new File("target/", screenshotName()));
         } catch (IOException e) {
             throw new RuntimeException("Unable to copy element image to visual folder");
         }
