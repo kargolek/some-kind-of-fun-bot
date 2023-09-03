@@ -24,10 +24,11 @@ public class GameActions extends WebActions {
 
     public void openGameLogExperienceInfo() throws InterruptedException {
         tabSwitchToGame();
-        Thread.sleep(2000);
         var experiencePanelPage = initPages.getGameMainPage()
                 .open()
                 .getExperiencePanelPage();
+
+        Thread.sleep(3000);
 
         var wood = experiencePanelPage.getWoodValue();
         var stone = experiencePanelPage.getStoneValue();

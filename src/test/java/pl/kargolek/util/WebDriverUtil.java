@@ -36,7 +36,6 @@ public class WebDriverUtil {
         while (true) {
             for (String window : driver.getWindowHandles()) {
                 driver.switchTo().window(window);
-                log.info(driver.getCurrentUrl());
                 if (driver.getCurrentUrl().contains(urlContains)) {
                     return;
                 }
