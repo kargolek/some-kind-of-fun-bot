@@ -52,7 +52,7 @@ public class YourCampActions extends WebActions {
         var hoplite = yourCampDetailPage.getAmountSoldierText(Soldier.Hoplite);
         var archer = yourCampDetailPage.getAmountSoldierText(Soldier.Archer);
         var cavalry = yourCampDetailPage.getAmountSoldierText(Soldier.Cavalry);
-        var sumUnits = militia + acolyte + slinger + hoplite + archer + cavalry;
+        var sumUnits = militia + acolyte + slinger + (hoplite * 2) + archer + (cavalry * 3);
         log.info("Sum available units: {}", sumUnits);
         return sumUnits;
     }

@@ -8,6 +8,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class CampSlots {
-    private Integer availableSlots;
+    private Integer occupiedSlots;
     private Integer maxSlots;
 }
