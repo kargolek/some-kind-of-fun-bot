@@ -2,7 +2,6 @@ package pl.kargolek.tests;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pl.kargolek.extension.driver.SeleniumWebDriver;
 import pl.kargolek.extension.pages.InitPageObject;
@@ -56,7 +55,7 @@ public class GameTest {
     }
 
     @Test
-    public void test_war_3() throws InterruptedException {
+    public void test_war_3(InitPages initPages) throws InterruptedException {
         log.info("Starting test war 3");
         gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_3"), password);
         warService.prepareUnitsAttack();

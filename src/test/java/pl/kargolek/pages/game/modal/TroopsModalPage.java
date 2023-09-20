@@ -18,6 +18,10 @@ public class TroopsModalPage extends BasePage {
             .with(By.xpath("//button[text()='Attack']"))
             .below(By.xpath("//div[text()='Your Troops']"));
 
+    private final By selectAllButton = RelativeLocator
+            .with(By.xpath("//button[text()='Select All Units']"))
+            .below(By.xpath("//div[text()='Your Troops']"));
+
     public TroopsModalPage(WebDriver driver) {
         super(driver);
     }
@@ -32,6 +36,12 @@ public class TroopsModalPage extends BasePage {
         var button = waitForElementVisibility(attackButton, Duration.ofSeconds(7));
         if(button.isEnabled())
             button.click();
+        return this;
+    }
+
+    public TroopsModalPage clickSelectAllUnits(){
+        waitForElementClickable(selectAllButton, getTimeoutDefault())
+                .click();
         return this;
     }
 }

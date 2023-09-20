@@ -16,7 +16,7 @@ public class OpponentsCampActions extends WebActions{
         initPages.getOpponentsCampPage()
                 .open()
                 .clickAttackButton()
-                .clickAllMaxButtons()
+                .clickSelectAllUnits()
                 .clickAttackButton();
     }
 }
