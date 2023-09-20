@@ -33,13 +33,13 @@ public class TroopsModalPage extends BasePage {
     }
 
     public TroopsModalPage clickAttackButton(){
-        var button = waitForElementVisibility(attackButton, Duration.ofSeconds(7));
-        if(button.isEnabled())
-            button.click();
+        waitForElementClickable(attackButton, getTimeoutDefault())
+                .click();
         return this;
     }
 
-    public TroopsModalPage clickSelectAllUnits(){
+    public TroopsModalPage clickSelectAllUnits() throws InterruptedException {
+        Thread.sleep(2000);
         waitForElementClickable(selectAllButton, getTimeoutDefault())
                 .click();
         return this;

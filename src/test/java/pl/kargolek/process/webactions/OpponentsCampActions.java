@@ -10,7 +10,7 @@ public class OpponentsCampActions extends WebActions{
         super(initPages);
     }
 
-    public void attackOpponentsCamp(){
+    public void attackOpponentsCamp() throws InterruptedException {
         log.info("Attack opponents by your units");
         tabSwitchToGame();
         initPages.getOpponentsCampPage()
