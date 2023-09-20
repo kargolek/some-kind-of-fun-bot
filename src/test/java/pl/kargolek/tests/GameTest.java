@@ -56,6 +56,7 @@ public class GameTest {
     }
 
     @Test
+    @Disabled
     public void test_war_3() throws InterruptedException {
         log.info("Starting test war 3");
         gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_3"), password);

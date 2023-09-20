@@ -16,6 +16,7 @@ public class GameService {
         walletActions.walletImport(securePhrase, password);
         gameActions.openGameAndClickConnectWallet();
         walletActions.acceptConnectSite();
+        gameActions.acceptTermsAndUserLicenseAgreements();
         gameActions.enterCityAfterConnectWallet();
         walletActions.signTransaction();
     }

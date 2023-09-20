@@ -39,6 +39,15 @@ public class GameActions extends WebActions {
         log.info("Wood:{}, Stone:{}, Gold:{} Gem:{} Experience:{}", wood, stone, gold, gem, experience);
     }
 
+    public void acceptTermsAndUserLicenseAgreements() {
+        tabSwitchToGame();
+        initPages.getGameMainPage()
+                .getAgreementsModalPage()
+                .clickTermsUserLicenseCheckbox()
+                .clickAgreementCheckbox()
+                .clickAcceptButton();
+    }
+
     public void enterCityAfterConnectWallet() {
         tabSwitchToGame();
         log.info("Entering city nft");
