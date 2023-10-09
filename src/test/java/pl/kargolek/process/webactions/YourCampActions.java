@@ -14,20 +14,35 @@ public class YourCampActions extends WebActions {
     public void recruitSoldiers() throws InterruptedException {
         tabSwitchToGame();
         log.info("Recruit soldiers");
+
         initPages.getYourCampDetailPage()
-                .open()
-                .clickMaxButton(Soldier.Cavalry)
-                .clickRecruitButton(Soldier.Cavalry)
-                .clickMaxButton(Soldier.Hoplite)
-                .clickRecruitButton(Soldier.Hoplite)
-                .clickMaxButton(Soldier.Archer)
-                .clickRecruitButton(Soldier.Archer)
-                .clickMaxButton(Soldier.Slinger)
-                .clickRecruitButton(Soldier.Slinger)
-                .clickMaxButton(Soldier.Acolyte)
-                .clickRecruitButton(Soldier.Acolyte)
-                .clickMaxButton(Soldier.Militia)
-                .clickRecruitButton(Soldier.Militia);
+                .open();
+
+        recruitSoldierProcess(Soldier.Cavalry);
+        recruitSoldierProcess(Soldier.Hoplite);
+        recruitSoldierProcess(Soldier.Archer);
+        recruitSoldierProcess(Soldier.Slinger);
+        recruitSoldierProcess(Soldier.Acolyte);
+        recruitSoldierProcess(Soldier.Militia);
+    }
+
+    private void recruitSoldierProcess(Soldier soldier) throws InterruptedException {
+        var isRecruitEnable = initPages.getYourCampDetailPage()
+                .clickMaxButton(soldier)
+                .isRecruitButtonEnable(soldier);
+
+        if (isRecruitEnable){
+            initPages.getYourCampDetailPage()
+                    .clickRecruitButton(soldier);
+            var isReviewModalOpened = initPages.reviewRecruitmentModalPage()
+                    .isReviewRecruitModalOpened();
+
+            if (isReviewModalOpened) {
+                initPages.reviewRecruitmentModalPage()
+                        .clickRecruitModalButton()
+                        .clickCloseModalButton();
+            }
+        }
     }
 
     public void claimSoldiers() {

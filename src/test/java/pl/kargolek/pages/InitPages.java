@@ -1,6 +1,7 @@
 package pl.kargolek.pages;
 
 import org.openqa.selenium.WebDriver;
+import pl.kargolek.pages.game.modal.ReviewRecruitmentModalPage;
 import pl.kargolek.pages.wallet.onboarding.WelcomePage;
 import pl.kargolek.pages.wallet.primary.main.WalletPrimaryPage;
 import pl.kargolek.pages.wallet.primary.popover.InfoPopoverPage;
@@ -44,6 +45,10 @@ public record InitPages(WebDriver driver) {
 
     public OpponentsCampPage getOpponentsCampPage() {
         return new OpponentsCampPage(this.driver);
+    }
+
+    public ReviewRecruitmentModalPage reviewRecruitmentModalPage(){
+        return new ReviewRecruitmentModalPage(this.driver);
     }
 
 }

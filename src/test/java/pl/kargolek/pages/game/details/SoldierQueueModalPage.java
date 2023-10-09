@@ -12,7 +12,7 @@ public class SoldierQueueModalPage extends BasePage {
     @FindBy(xpath = "//div[text()='Recruitments in progress']")
     private WebElement titleHeader;
 
-    @FindBy(xpath = "//div[text()='Recruitments in progress']/..//*[local-name()='svg']")
+    @FindBy(xpath = "//div[text()='Recruitments in progress']/../../../div/*[local-name()='svg']")
     private WebElement closeModalButton;
     @FindBy(xpath = "//div[text()='Recruitments in progress']/../..//*[text()='Claim']")
     private List<WebElement> claimButtons;
@@ -25,10 +25,10 @@ public class SoldierQueueModalPage extends BasePage {
         return waitForElementVisibility(titleHeader, getTimeoutDefault());
     }
 
-    public SoldierQueueModalPage clickCloseModalButton() {
+    public YourCampDetailPage clickCloseModalButton() {
         waitForElementClickable(closeModalButton, getTimeoutDefault())
                 .click();
-        return this;
+        return new YourCampDetailPage(driver);
     }
 
     public SoldierQueueModalPage clickAllClaimButtons() {

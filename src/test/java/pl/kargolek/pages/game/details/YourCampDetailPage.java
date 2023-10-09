@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.locators.RelativeLocator;
+import pl.kargolek.pages.game.modal.ReviewRecruitmentModalPage;
 import pl.kargolek.process.enums.Soldier;
 import pl.kargolek.util.TestProperty;
 
@@ -36,13 +37,13 @@ public class YourCampDetailPage extends BaseDetailViewPage {
                 .getText();
     }
 
-    public YourCampDetailPage clickRecruitButton(Soldier soldier) throws InterruptedException {
+    public ReviewRecruitmentModalPage clickRecruitButton(Soldier soldier) throws InterruptedException {
         Thread.sleep(500);
         var element = waitForElementVisibility(By.xpath(String.format(recruitSoldierButton, soldier)),
                 getTimeoutDefault());
         if (element.isEnabled())
             element.click();
-        return this;
+        return new ReviewRecruitmentModalPage(driver);
     }
 
     public YourCampDetailPage clickMaxButton(Soldier soldier) {
@@ -66,6 +67,12 @@ public class YourCampDetailPage extends BaseDetailViewPage {
                 .toLeftOf(By.xpath(String.format("//img[contains(@src, '/assets/%s')]",
                         soldier.toString().toLowerCase()))), getTimeoutDefault())
                 .getText());
+    }
+
+    public boolean isRecruitButtonEnable(Soldier soldier) throws InterruptedException {
+        Thread.sleep(1000);
+        return waitForElementVisibility(By.xpath(String.format(recruitSoldierButton, soldier)),
+                getTimeoutDefault()).isEnabled();
     }
 
 }
