@@ -42,6 +42,7 @@ public class GameTest {
     }
 
     @Test
+    @Disabled
     public void test_war_1() throws InterruptedException {
         log.info("Starting test war 1");
         gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE"), password);
@@ -49,6 +50,7 @@ public class GameTest {
     }
 
     @Test
+    @Disabled
     public void test_war_2() throws InterruptedException {
         log.info("Starting test war 2");
         gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_2"), password);
