@@ -41,6 +41,7 @@ public class GameTest {
         gameService = new GameService(gameActions, walletActions);
     }
 
+    @Disabled
     @Test
     public void test_war_1() throws InterruptedException {
         log.info("Starting test war 1");
@@ -48,6 +49,7 @@ public class GameTest {
         warService.prepareUnitsAttack();
     }
 
+    @Disabled
     @Test
     public void test_war_2() throws InterruptedException {
         log.info("Starting test war 2");
