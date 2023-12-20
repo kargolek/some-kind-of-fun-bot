@@ -1,15 +1,14 @@
 package pl.kargolek.pages;
 
 import org.openqa.selenium.WebDriver;
+import pl.kargolek.pages.game.GameMainPage;
+import pl.kargolek.pages.game.details.buildings.*;
+import pl.kargolek.pages.game.modal.ChooseCityModalPage;
 import pl.kargolek.pages.game.modal.ReviewRecruitmentModalPage;
 import pl.kargolek.pages.wallet.onboarding.WelcomePage;
 import pl.kargolek.pages.wallet.primary.main.WalletPrimaryPage;
 import pl.kargolek.pages.wallet.primary.popover.InfoPopoverPage;
 import pl.kargolek.pages.wallet.primary.popover.NetworkAddedPopoverPage;
-import pl.kargolek.pages.game.GameMainPage;
-import pl.kargolek.pages.game.details.OpponentsCampPage;
-import pl.kargolek.pages.game.details.YourCampDetailPage;
-import pl.kargolek.pages.game.modal.ChooseCityModalPage;
 
 /**
  * @author Karol Kuta-Orlowicz
@@ -47,7 +46,39 @@ public record InitPages(WebDriver driver) {
         return new OpponentsCampPage(this.driver);
     }
 
-    public ReviewRecruitmentModalPage reviewRecruitmentModalPage(){
+    public AcademyDetailViewPage getAcademyDetailViewPage() {
+        return new AcademyDetailViewPage(this.driver);
+    }
+
+    public GoldDetailViewPage getGoldDetailViewPage(){
+        return new GoldDetailViewPage(this.driver);
+    }
+
+    public MarketDetailViewPage getMarketDetailViewPage() {
+        return new MarketDetailViewPage(this.driver);
+    }
+
+    public QuarryDetailViewPage getQuarryDetailViewPage(){
+        return new QuarryDetailViewPage(this.driver);
+    }
+
+    public TempleDetailViewPage getTempleDetailViewPage(){
+        return new TempleDetailViewPage(this.driver);
+    }
+
+    public TimberCampDetailViewPage getTimberCampDetailViewPage(){
+        return new TimberCampDetailViewPage(this.driver);
+    }
+
+    public TreasuryDetailViewPage getTreasuryDetailViewPage(){
+        return new TreasuryDetailViewPage(this.driver);
+    }
+
+    public WallDetailViewPage getWallDetailViewPage(){
+        return new WallDetailViewPage(this.driver);
+    }
+
+    public ReviewRecruitmentModalPage reviewRecruitmentModalPage() {
         return new ReviewRecruitmentModalPage(this.driver);
     }
 

@@ -2,7 +2,9 @@ package pl.kargolek.process.webactions;
 
 import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
-import pl.kargolek.pages.game.details.YourCampDetailPage;
+import pl.kargolek.pages.game.details.buildings.YourCampDetailPage;
+import pl.kargolek.process.data.CampResources;
+import pl.kargolek.process.data.TreasuryMaxResource;
 import pl.kargolek.util.WebDriverUtil;
 
 @Slf4j
@@ -22,7 +24,7 @@ public class GameActions extends WebActions {
                 .clickWalletButton();
     }
 
-    public void openGameLogExperienceInfo() throws InterruptedException {
+    public CampResources openGameLogExperienceInfo() throws InterruptedException {
         tabSwitchToGame();
         var experiencePanelPage = initPages.getGameMainPage()
                 .open()
@@ -37,6 +39,33 @@ public class GameActions extends WebActions {
         var experience = experiencePanelPage.getExperienceValue();
 
         log.info("Wood:{}, Stone:{}, Gold:{} Gem:{} Experience:{}", wood, stone, gold, gem, experience);
+        return new CampResources(
+                Double.parseDouble(wood),
+                Double.parseDouble(stone),
+                Double.parseDouble(gold),
+                Double.parseDouble(gem)
+        );
+    }
+
+    public TreasuryMaxResource openTreasuryAndGetMaxResourcesValue() throws InterruptedException {
+        tabSwitchToGame();
+        var treasuryDetailPage = initPages.getGameMainPage()
+                .open()
+                .getSideNavigationPage()
+                .clickTreasuryButton();
+
+        Thread.sleep(1500);
+
+        var wood = treasuryDetailPage.getWoodValue();
+        var stone = treasuryDetailPage.getStoneValue();
+        var gold = treasuryDetailPage.getGoldValue();
+
+        log.info("Treasury Max Resource: Wood:{}, Stone:{}, Gold:{}", wood, stone, gold);
+        return new TreasuryMaxResource(
+                Double.parseDouble(wood),
+                Double.parseDouble(stone),
+                Double.parseDouble(gold)
+        );
     }
 
     public void acceptTermsAndUserLicenseAgreements() {

@@ -1,4 +1,4 @@
-package pl.kargolek.pages.game.details;
+package pl.kargolek.pages.game.details.buildings;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.locators.RelativeLocator;
+import pl.kargolek.pages.game.details.BaseDetailViewPage;
 import pl.kargolek.pages.game.modal.ReviewRecruitmentModalPage;
+import pl.kargolek.pages.game.modal.SoldierQueueModalPage;
 import pl.kargolek.process.enums.Soldier;
 import pl.kargolek.util.TestProperty;
 

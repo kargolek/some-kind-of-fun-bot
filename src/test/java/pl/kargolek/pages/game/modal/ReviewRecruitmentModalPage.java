@@ -4,8 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pl.kargolek.pages.BasePage;
-import pl.kargolek.pages.game.details.SoldierQueueModalPage;
-import pl.kargolek.pages.game.details.YourCampDetailPage;
+import pl.kargolek.pages.game.details.buildings.YourCampDetailPage;
 
 import java.time.Duration;
 import java.util.List;

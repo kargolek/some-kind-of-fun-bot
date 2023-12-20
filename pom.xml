@@ -22,7 +22,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <selenium.version>4.11.0</selenium.version>
+        <selenium.version>4.16.1</selenium.version>
         <junit.jupiter.version>5.9.2</junit.jupiter.version>
         <surefile.version>3.1.2</surefile.version>
         <slf4j-api.version>2.0.6</slf4j-api.version>

@@ -26,6 +26,8 @@ public class BasePage {
     public final FluentWait<WebDriver> fluentWait;
 
     final Duration timeoutDefault = Duration.ofSeconds(15);
+    final Duration timeout5Sec = Duration.ofSeconds(5);
+    final Duration timeout1Sec = Duration.ofSeconds(1);
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -41,6 +43,10 @@ public class BasePage {
 
     public WebElement waitForElementVisibility(By by, Duration timeout) {
         return new WebDriverWait(this.driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    public WebElement waitForElementPresent(By by, Duration timeout) {
+        return new WebDriverWait(this.driver, timeout).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public Boolean waitForElementInvisibility(WebElement element, Duration timeout) {
@@ -66,6 +72,17 @@ public class BasePage {
         return elementsArray;
     }
 
+    public List<WebElement> waitForElementsVisibilityIgnoreTimeout(WebElement element, Duration timeout) {
+        List<WebElement> elementsArray = new ArrayList<>();
+        try {
+            elementsArray = new WebDriverWait(this.driver, timeout)
+                    .until(ExpectedConditions.visibilityOfAllElements(element));
+        } catch(TimeoutException e){
+            log.info("Timeout occurs, ignoring it. Element: " + element);
+        }
+        return elementsArray;
+    }
+
     public List<WebElement> waitForElementsVisibilityIgnoreTimeout(By locator, Duration timeout) {
         List<WebElement> elementsArray = new ArrayList<>();
         try {
@@ -75,6 +92,16 @@ public class BasePage {
             log.info("Timeout occurs, ignoring it. Element: " + locator);
         }
         return elementsArray;
+    }
+
+    public boolean isWebElementVisible(WebElement element, Duration timeout){
+        try {
+            new WebDriverWait(this.driver, timeout).until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch(TimeoutException e){
+            log.info("Timeout occurs, ignoring it. Element: " + element);
+            return false;
+        }
     }
 
     public List<WebElement> waitForElementAllVisibility(By locator, Duration timeout) {

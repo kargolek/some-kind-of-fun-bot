@@ -54,6 +54,8 @@ public class WebDriverFactory {
                     ChromeOptions chromeOptions = (ChromeOptions) getOptions();
                     chromeOptions.addArguments("--profile-directory=Default");
                     chromeOptions.addArguments("--lang=en");
+                    chromeOptions.addArguments("force-device-scale-factor=0.9");
+                    chromeOptions.addArguments("high-dpi-support=0.9");
                     chromeOptions.addExtensions(new File("chrome_extension/10.34.5_0.crx"));
                     return getLocalWebDriver(chromeOptions);
                 }

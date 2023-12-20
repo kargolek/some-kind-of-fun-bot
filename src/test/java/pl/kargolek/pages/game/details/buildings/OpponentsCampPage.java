@@ -1,8 +1,9 @@
-package pl.kargolek.pages.game.details;
+package pl.kargolek.pages.game.details.buildings;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.locators.RelativeLocator;
+import pl.kargolek.pages.game.details.BaseDetailViewPage;
 import pl.kargolek.pages.game.modal.TroopsModalPage;
 import pl.kargolek.util.TestProperty;
 

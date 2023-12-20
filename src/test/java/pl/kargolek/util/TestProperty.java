@@ -61,4 +61,36 @@ public class TestProperty {
         return System.getenv("SEC_GAME_URL_OPPONENTS_CAMP");
     }
 
+    public String getTimberURL(){
+        return System.getenv("SEC_GAME_URL_TIMBER");
+    }
+
+    public String getQuarryURL(){
+        return System.getenv("SEC_GAME_URL_QUARRY");
+    }
+
+    public String getGoldURL(){
+        return System.getenv("SEC_GAME_URL_GOLD");
+    }
+
+    public String getWallURL(){
+        return System.getenv("SEC_GAME_URL_WALL");
+    }
+
+    public String getAcademyURL(){
+        return System.getenv("SEC_GAME_URL_ACADEMY");
+    }
+
+    public String getTempleURL(){
+        return System.getenv("SEC_GAME_URL_TEMPLE");
+    }
+
+    public String getTreasuryURL(){
+        return System.getenv("SEC_GAME_URL_TREASURY");
+    }
+
+    public String getMarketURL(){
+        return System.getenv("SEC_GAME_URL_MARKET");
+    }
+
 }
