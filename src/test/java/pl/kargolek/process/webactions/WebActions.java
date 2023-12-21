@@ -16,17 +16,14 @@ abstract class WebActions {
     }
 
     public void refreshPage() {
-        log.info("Refresh page");
         WebDriverUtil.refreshPage(initPages.driver());
     }
 
     public void tabSwitchToWallet() {
-        log.info("Switch to wallet tab");
         WebDriverUtil.switchToNextTab(initPages.driver(), "chrome-extension://", 5000);
     }
 
     public void tabSwitchToGame() {
-        log.info("Switch to game tab");
         WebDriverUtil.switchToNextTab(initPages.driver(), TestProperty.getInstance().getGameURL(), 5000);
     }
 }

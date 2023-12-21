@@ -13,7 +13,6 @@ public class YourCampActions extends WebActions {
 
     public void recruitSoldiers() throws InterruptedException {
         tabSwitchToGame();
-        log.info("Recruit soldiers");
 
         initPages.getYourCampDetailPage()
                 .open();
@@ -47,7 +46,6 @@ public class YourCampActions extends WebActions {
 
     public void claimSoldiers() {
         tabSwitchToGame();
-        log.info("Claim soldiers");
         initPages.getYourCampDetailPage()
                 .open()
                 .clickOpenQueueButton()
@@ -55,9 +53,8 @@ public class YourCampActions extends WebActions {
                 .clickCloseModalButton();
     }
 
-    public Integer sumUnits() throws InterruptedException {
+    public Integer sumUnits() {
         tabSwitchToGame();
-        log.info("Summarize all units");
         var yourCampDetailPage = initPages.getYourCampDetailPage()
                 .open();
 

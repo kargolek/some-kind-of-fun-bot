@@ -16,7 +16,6 @@ public class GameActions extends WebActions {
 
     public void openGameAndClickConnectWallet() {
         WebDriverUtil.switchToNextTab(initPages.driver(), "data", 5000);
-        log.info("Click connect wallet button");
         initPages.getGameMainPage()
                 .open()
                 .getSideNavigationPage()
@@ -79,7 +78,6 @@ public class GameActions extends WebActions {
 
     public void enterCityAfterConnectWallet() {
         tabSwitchToGame();
-        log.info("Entering city nft");
         initPages.getChooseCityModalPage()
                 .clickEnterCityButton()
                 .getSideNavigationPage();
@@ -87,7 +85,6 @@ public class GameActions extends WebActions {
 
     public YourCampDetailPage openYourCamp() {
         tabSwitchToGame();
-        log.info("Open your camp page");
         var barracksDetailsPage = initPages.getGameMainPage()
                 .getSideNavigationPage()
                 .clickCampButton();

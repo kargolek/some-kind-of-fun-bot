@@ -15,8 +15,8 @@ public class WarService {
     private final OpponentsCampActions opponentsCampActions;
 
     public void prepareUnitsAttack() throws InterruptedException {
+        log.info("Start unit attack service");
         yourCampActions.claimSoldiers();
-
         var yourCampDetailPage = gameActions.openYourCamp();
         var yourCampSlots = MapData.mapCampSlots(yourCampDetailPage.getSlotsOccupiedText());
         var diff = yourCampSlots.getMaxSlots() - yourCampSlots.getOccupiedSlots();
