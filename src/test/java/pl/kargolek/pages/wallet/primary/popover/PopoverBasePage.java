@@ -42,9 +42,7 @@ public class PopoverBasePage extends BasePage {
             element = this.waitForElementVisibility(this.closeButton,
                     Duration.ofSeconds(5));
             element.click();
-        } catch (TimeoutException e) {
-            log.info("Element not exist. Click action aborted.");
-        }
+        } catch (TimeoutException ignored) {}
         return this;
     }
 }

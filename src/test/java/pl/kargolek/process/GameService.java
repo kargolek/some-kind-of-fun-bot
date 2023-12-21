@@ -15,12 +15,14 @@ public class GameService {
     private WalletActions walletActions;
 
     public void connectAndLoginToGameAndWallet(String securePhrase, String password) throws InterruptedException {
+        log.info("Start connect to wallet service");
         walletActions.walletImport(securePhrase, password);
         gameActions.openGameAndClickConnectWallet();
         walletActions.acceptConnectSite();
         gameActions.acceptTermsAndUserLicenseAgreements();
         gameActions.enterCityAfterConnectWallet();
         walletActions.signTransaction();
+        log.info("Connect to wallet service has been complete");
     }
 
 }
