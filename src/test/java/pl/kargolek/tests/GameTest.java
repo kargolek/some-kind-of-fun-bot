@@ -82,4 +82,15 @@ public class GameTest {
         }
     }
 
+    @Test
+    public void test_war_4() throws InterruptedException {
+        log.info("Starting test war 4");
+        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_4"), password);
+        var minRequirements = campResourceService.isExceedMinRequirements(0.4);
+        if (minRequirements){
+            upgradeBuildingsService.runUpgradeProcess();
+            warService.prepareUnitsAttack();
+        }
+    }
+
 }
