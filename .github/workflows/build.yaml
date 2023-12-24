@@ -5,6 +5,7 @@ env:
   SEC_PHRASE: ${{ secrets.SEC_PHRASE }}
   SEC_PHRASE_2: ${{ secrets.SEC_PHRASE_2 }}
   SEC_PHRASE_3: ${{ secrets.SEC_PHRASE_3 }}
+  SEC_PHRASE_4: ${{ secrets.SEC_PHRASE_4 }}
   SEC_PASSWORD: ${{ secrets.SEC_PASSWORD }}
   SEC_GAME_URL: ${{ secrets.SEC_GAME_URL }}
   SEC_GAME_URL_CAMP: ${{ secrets.SEC_GAME_URL_CAMP }}
