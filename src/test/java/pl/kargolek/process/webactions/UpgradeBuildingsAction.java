@@ -24,9 +24,10 @@ public class UpgradeBuildingsAction extends WebActions {
         itemDetailsPageable.open();
         if (!itemDetailsPageable.isUpgradeButtonNotAvailable()){
             var upgradeModalPage = itemDetailsPageable.clickUpgradeButton();
-            if (upgradeModalPage.isOpenQueueButtonNotAvailable())
+            if (upgradeModalPage.isOpenQueueButtonNotAvailable()){
                 upgradeModalPage.clickUpgradeButton();
                 log.info("Item: {} upgrade process has been started", pageableCLassName);
+            }
         } else {
             log.info("Upgrade button not available for {}", pageableCLassName);
         }
