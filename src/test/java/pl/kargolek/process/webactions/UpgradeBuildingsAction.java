@@ -18,16 +18,17 @@ public class UpgradeBuildingsAction extends WebActions {
     }
 
     public void upgradeBuildingsProcess(ItemDetailsPageable itemDetailsPageable) {
-        var pageableCLass = itemDetailsPageable.getClass().getSimpleName();
-        log.info("Start upgrade building process for:{}", pageableCLass);
+        var pageableCLassName = itemDetailsPageable.getClass().getSimpleName();
+        log.info("Start upgrade building process for:{}", pageableCLassName);
         tabSwitchToGame();
         itemDetailsPageable.open();
         if (!itemDetailsPageable.isUpgradeButtonNotAvailable()){
             var upgradeModalPage = itemDetailsPageable.clickUpgradeButton();
             if (upgradeModalPage.isOpenQueueButtonNotAvailable())
                 upgradeModalPage.clickUpgradeButton();
+                log.info("Item: {} upgrade process has been started", pageableCLassName);
         } else {
-            log.info("Upgrade button not available for {}", pageableCLass);
+            log.info("Upgrade button not available for {}", pageableCLassName);
         }
     }
 
