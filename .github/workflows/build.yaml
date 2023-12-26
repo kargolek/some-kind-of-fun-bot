@@ -21,6 +21,7 @@ env:
   SEC_GAME_URL_TIMBER: ${{ secrets.SEC_GAME_URL_TIMBER }}
   SEC_GAME_URL_TREASURY: ${{ secrets.SEC_GAME_URL_TREASURY }}
   SEC_GAME_URL_WALL: ${{ secrets.SEC_GAME_URL_WALL }}
+  SEC_GAME_URL_SENATE: ${{ secrets.SEC_GAME_URL_SENATE }}
 
 on:
   push:

@@ -1,7 +1,6 @@
 package pl.kargolek.pages.game.details.buildings;
 
 import org.openqa.selenium.WebDriver;
-import pl.kargolek.pages.BasePage;
 import pl.kargolek.pages.game.details.BaseDetailViewPage;
 import pl.kargolek.util.TestProperty;
 
@@ -19,4 +18,10 @@ public class MarketDetailViewPage extends BaseDetailViewPage {
         driver.get(TestProperty.getInstance().getMarketURL());
         return this;
     }
+
+    @Override
+    public String extractHeaderTextPattern() {
+        return "Market";
+    }
+
 }

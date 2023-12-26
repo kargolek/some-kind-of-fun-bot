@@ -20,6 +20,11 @@ public class OpponentsCampPage extends BaseDetailViewPage {
         return this;
     }
 
+    @Override
+    public String extractHeaderTextPattern() {
+        return "Barbarian Camp";
+    }
+
     public TroopsModalPage clickAttackButton(){
         waitForElementClickable(attackOpponentsCampButton, getTimeoutDefault())
                 .click();

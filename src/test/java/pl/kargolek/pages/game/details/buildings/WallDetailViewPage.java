@@ -18,4 +18,9 @@ public class WallDetailViewPage extends BaseDetailViewPage {
         driver.get(TestProperty.getInstance().getWallURL());
         return this;
     }
+
+    @Override
+    public String extractHeaderTextPattern() {
+        return "Wall";
+    }
 }

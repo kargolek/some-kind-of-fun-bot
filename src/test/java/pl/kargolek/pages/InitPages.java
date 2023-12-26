@@ -70,12 +70,16 @@ public record InitPages(WebDriver driver) {
         return new TimberCampDetailViewPage(this.driver);
     }
 
-    public TreasuryDetailViewPage getTreasuryDetailViewPage(){
+    public TreasuryDetailViewPage getTreasuryDetailViewPage() {
         return new TreasuryDetailViewPage(this.driver);
     }
 
-    public WallDetailViewPage getWallDetailViewPage(){
+    public WallDetailViewPage getWallDetailViewPage() {
         return new WallDetailViewPage(this.driver);
+    }
+
+    public SenateDetailViewPage getSenateDetailViewPage() {
+        return new SenateDetailViewPage(this.driver);
     }
 
     public ReviewRecruitmentModalPage reviewRecruitmentModalPage() {

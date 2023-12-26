@@ -18,4 +18,9 @@ public class QuarryDetailViewPage extends BaseDetailViewPage {
         driver.get(TestProperty.getInstance().getQuarryURL());
         return this;
     }
+
+    @Override
+    public String extractHeaderTextPattern() {
+        return "Quarry";
+    }
 }

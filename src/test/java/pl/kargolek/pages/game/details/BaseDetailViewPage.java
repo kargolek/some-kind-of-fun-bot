@@ -38,4 +38,10 @@ public abstract class BaseDetailViewPage extends BasePage implements ItemDetails
                 .isEmpty();
     }
 
+    @Override
+    public String getHeaderText() {
+        var xpath = String.format("//h1[contains(text(), '%s')]", extractHeaderTextPattern());
+        return waitForElementVisibility(By.xpath(xpath), getTimeoutDefault())
+                .getText();
+    }
 }

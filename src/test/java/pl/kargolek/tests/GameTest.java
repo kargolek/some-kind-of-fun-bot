@@ -1,6 +1,7 @@
 package pl.kargolek.tests;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -9,10 +10,7 @@ import pl.kargolek.extension.javascript.JavascriptDriverExecutor;
 import pl.kargolek.extension.pages.InitPageObject;
 import pl.kargolek.extension.properties.TestProperties;
 import pl.kargolek.pages.InitPages;
-import pl.kargolek.process.CampResourceService;
-import pl.kargolek.process.GameService;
-import pl.kargolek.process.UpgradeBuildingsService;
-import pl.kargolek.process.WarService;
+import pl.kargolek.process.*;
 import pl.kargolek.process.webactions.*;
 import pl.kargolek.util.JavascriptDriver;
 import pl.kargolek.util.TestProperty;
@@ -47,6 +45,12 @@ public class GameTest {
         gameService = new GameService(gameActions, walletActions);
         campResourceService = new CampResourceService(gameActions);
         upgradeBuildingsService = new UpgradeBuildingsService(buildingQueueActions, upgradeBuildingActions);
+    }
+
+    @AfterEach
+    public void tearDownEach(InitPages pages){
+        var itemLevelActions = new ItemLevelActions(pages);
+        new ItemLevelService(itemLevelActions).logItemsLevels();
     }
 
     @Test
@@ -119,7 +123,7 @@ public class GameTest {
     public void test_war_7() throws InterruptedException {
         log.info("Starting test war 7");
         gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_7"), password);
-        var minRequirements = campResourceService.isExceedMinRequirements(0.3);
+        var minRequirements = campResourceService.isExceedMinRequirements(0.4);
         if (minRequirements){
             upgradeBuildingsService.runUpgradeProcess();
             warService.prepareUnitsAttack();

@@ -11,4 +11,6 @@ public interface ItemDetailsPageable {
     BasePage open();
     UpgradeModalPage clickUpgradeButton();
     boolean isUpgradeButtonNotAvailable();
+    String getHeaderText();
+    String extractHeaderTextPattern();
 }

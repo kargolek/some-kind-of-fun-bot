@@ -1,27 +1,27 @@
 package pl.kargolek.pages.game.details.buildings;
 
 import org.openqa.selenium.WebDriver;
+import pl.kargolek.pages.BasePage;
 import pl.kargolek.pages.game.details.BaseDetailViewPage;
 import pl.kargolek.util.TestProperty;
 
 /**
  * @author Karol Kuta-Orlowicz
  */
-public class GoldDetailViewPage extends BaseDetailViewPage {
+public class SenateDetailViewPage extends BaseDetailViewPage {
 
-    public GoldDetailViewPage(WebDriver driver) {
+    public SenateDetailViewPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public GoldDetailViewPage open() {
-        driver.get(TestProperty.getInstance().getGoldURL());
+    public SenateDetailViewPage open() {
+        driver.get(TestProperty.getInstance().getSenateURL());
         return this;
     }
 
     @Override
     public String extractHeaderTextPattern() {
-        return "Gold Mine";
+        return "Senate";
     }
-
 }

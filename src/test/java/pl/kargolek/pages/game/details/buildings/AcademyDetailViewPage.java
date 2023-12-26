@@ -18,4 +18,9 @@ public class AcademyDetailViewPage extends BaseDetailViewPage {
         driver.get(TestProperty.getInstance().getAcademyURL());
         return this;
     }
+
+    @Override
+    public String extractHeaderTextPattern() {
+        return "Academy";
+    }
 }

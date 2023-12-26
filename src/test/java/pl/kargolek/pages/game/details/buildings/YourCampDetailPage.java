@@ -33,6 +33,11 @@ public class YourCampDetailPage extends BaseDetailViewPage {
         return this;
     }
 
+    @Override
+    public String extractHeaderTextPattern() {
+        return "Barracks";
+    }
+
     public String getSlotsOccupiedText() {
         waitForElementVisibility(unitsValue, getTimeoutDefault());
         return waitForElementVisibility(slotsOccupied, getTimeoutDefault())

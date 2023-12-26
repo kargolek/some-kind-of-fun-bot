@@ -93,4 +93,8 @@ public class TestProperty {
         return System.getenv("SEC_GAME_URL_MARKET");
     }
 
+    public String getSenateURL(){
+        return System.getenv("SEC_GAME_URL_SENATE");
+    }
+
 }

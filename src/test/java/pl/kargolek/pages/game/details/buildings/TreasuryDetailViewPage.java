@@ -20,6 +20,11 @@ public class TreasuryDetailViewPage extends BaseDetailViewPage {
         return this;
     }
 
+    @Override
+    public String extractHeaderTextPattern() {
+        return "Treasury";
+    }
+
     public String getWoodValue() {
         return waitForElementVisibility(getResourceByLocator("wood"), getTimeoutDefault()).getText();
     }
