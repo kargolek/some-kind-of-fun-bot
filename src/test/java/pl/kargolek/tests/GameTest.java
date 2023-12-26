@@ -125,5 +125,4 @@ public class GameTest {
             warService.prepareUnitsAttack();
         }
     }
-
 }
