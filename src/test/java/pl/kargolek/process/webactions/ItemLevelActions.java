@@ -22,7 +22,8 @@ public class ItemLevelActions extends WebActions{
     public void getItemLevel(ItemDetailsPageable itemDetailsPageable) {
         tabSwitchToGame();
         itemDetailsPageable.open();
-        itemsLevels.add(itemDetailsPageable.getHeaderText());
+        itemsLevels.add(itemDetailsPageable.getHeaderText().replace(" ", "")
+                .replace("lvl", ""));
     }
 
     public void logItemsLevelsList(){
