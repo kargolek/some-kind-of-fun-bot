@@ -46,75 +46,76 @@ public class GameTest {
     }
 
     @AfterEach
-    public void tearDownEach(InitPages pages){
+    public void tearDownEach(InitPages pages) throws InterruptedException {
         var itemLevelActions = new ItemLevelActions(pages);
         new ItemLevelService(itemLevelActions).logItemsLevels();
+        upgradeBuildingsService.logBuildingQueueList();
     }
 
-    @Test
-    public void test_war_1() throws InterruptedException {
-        log.info("Starting test war 1");
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
-    }
-
-    @Test
-    public void test_war_2() throws InterruptedException {
-        log.info("Starting test war 2");
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_2"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
-    }
-
-    @Test
-    public void test_war_3() throws InterruptedException {
-        log.info("Starting test war 3");
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_3"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
-    }
-
-    @Test
-    public void test_war_4() throws InterruptedException {
-        log.info("Starting test war 4");
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_4"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.4);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
-    }
-
-    @Test
-    public void test_war_5() throws InterruptedException {
-        log.info("Starting test war 5");
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_5"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.3);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
-    }
+//    @Test
+//    public void test_war_1() throws InterruptedException {
+//        log.info("Starting test war 1");
+//        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE"), password);
+//
+//        var canWeAttackOpponents = warService.canWeAttackOpponents();
+//        warService.recruitSoldiers(canWeAttackOpponents);
+//
+//        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
+//        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
+//        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
+//    }
+//
+//    @Test
+//    public void test_war_2() throws InterruptedException {
+//        log.info("Starting test war 2");
+//        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_2"), password);
+//
+//        var canWeAttackOpponents = warService.canWeAttackOpponents();
+//        warService.recruitSoldiers(canWeAttackOpponents);
+//
+//        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
+//        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
+//        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
+//    }
+//
+//    @Test
+//    public void test_war_3() throws InterruptedException {
+//        log.info("Starting test war 3");
+//        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_3"), password);
+//
+//        var canWeAttackOpponents = warService.canWeAttackOpponents();
+//        warService.recruitSoldiers(canWeAttackOpponents);
+//
+//        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
+//        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
+//        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
+//    }
+//
+//    @Test
+//    public void test_war_4() throws InterruptedException {
+//        log.info("Starting test war 4");
+//        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_4"), password);
+//
+//        var canWeAttackOpponents = warService.canWeAttackOpponents();
+//        warService.recruitSoldiers(canWeAttackOpponents);
+//
+//        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.4);
+//        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
+//        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
+//    }
+//
+//    @Test
+//    public void test_war_5() throws InterruptedException {
+//        log.info("Starting test war 5");
+//        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_5"), password);
+//
+//        var canWeAttackOpponents = warService.canWeAttackOpponents();
+//        warService.recruitSoldiers(canWeAttackOpponents);
+//
+//        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.3);
+//        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
+//        warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, exceedMinRequirements);
+//    }
 
     @Test
     public void test_war_6() throws InterruptedException {

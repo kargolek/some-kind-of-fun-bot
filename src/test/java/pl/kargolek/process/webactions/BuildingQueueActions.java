@@ -18,4 +18,12 @@ public class BuildingQueueActions extends WebActions{
                 .clickBuildingQueueButton()
                 .getNumberOfUpgradedItems();
     }
+
+    public String getUpgradeItemsListText() throws InterruptedException {
+        return this.initPages.getGameMainPage()
+                .open()
+                .getSideNavigationPage()
+                .clickBuildingQueueButton()
+                .getItemsQueueContainerText();
+    }
 }

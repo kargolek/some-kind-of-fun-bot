@@ -27,4 +27,9 @@ public class UpgradeBuildingsService {
             log.info("Upgrade process has been skipped");
         }
     }
+
+    public void logBuildingQueueList() throws InterruptedException {
+        var buildingQueueText = buildingQueueActions.getUpgradeItemsListText();
+        log.info("Building queue: {}", buildingQueueText);
+    }
 }
