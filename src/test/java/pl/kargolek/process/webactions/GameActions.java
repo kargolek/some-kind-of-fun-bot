@@ -37,7 +37,7 @@ public class GameActions extends WebActions {
         var gem = experiencePanelPage.getGemValue();
         var experience = experiencePanelPage.getExperienceValue();
 
-        log.info("Wood:{}, Stone:{}, Gold:{} Gem:{} Experience:{}", wood, stone, gold, gem, experience);
+        log.info("CampResources: Wood:{}, Stone:{}, Gold:{} Gem:{} Experience:{}", wood, stone, gold, gem, experience);
         return new CampResources(
                 Double.parseDouble(wood),
                 Double.parseDouble(stone),
@@ -59,7 +59,7 @@ public class GameActions extends WebActions {
         var stone = treasuryDetailPage.getStoneValue();
         var gold = treasuryDetailPage.getGoldValue();
 
-        log.info("Treasury Max Resource: Wood:{}, Stone:{}, Gold:{}", wood, stone, gold);
+        log.info("TreasuryMaxResource: Wood:{}, Stone:{}, Gold:{}", wood, stone, gold);
         return new TreasuryMaxResource(
                 Double.parseDouble(wood),
                 Double.parseDouble(stone),

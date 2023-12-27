@@ -1,8 +1,10 @@
 package pl.kargolek.pages;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +20,6 @@ import java.util.List;
  * @author Karol Kuta-Orlowicz
  */
 @Getter
-@Slf4j
 public class BasePage {
 
     public final WebDriver driver;
@@ -66,8 +67,7 @@ public class BasePage {
         try {
             elementsArray = new WebDriverWait(this.driver, timeout)
                     .until(ExpectedConditions.visibilityOfAllElements(elements));
-        } catch(TimeoutException e){
-            log.info("Timeout occurs, ignoring it. Element: " + elements);
+        } catch (TimeoutException ignored) {
         }
         return elementsArray;
     }
@@ -77,8 +77,7 @@ public class BasePage {
         try {
             elementsArray = new WebDriverWait(this.driver, timeout)
                     .until(ExpectedConditions.visibilityOfAllElements(element));
-        } catch(TimeoutException e){
-            log.info("Timeout occurs, ignoring it. Element: " + element);
+        } catch (TimeoutException ignored) {
         }
         return elementsArray;
     }
@@ -88,8 +87,7 @@ public class BasePage {
         try {
             elementsArray = new WebDriverWait(this.driver, timeout)
                     .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-        } catch(TimeoutException e){
-            log.info("Timeout occurs, ignoring it. Element: " + locator);
+        } catch (TimeoutException ignored) {
         }
         return elementsArray;
     }
@@ -99,7 +97,6 @@ public class BasePage {
             new WebDriverWait(this.driver, timeout).until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch(TimeoutException e){
-            log.info("Timeout occurs, ignoring it. Element: " + element);
             return false;
         }
     }
