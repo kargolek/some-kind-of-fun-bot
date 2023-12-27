@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
 import pl.kargolek.pages.game.details.ItemDetailsPageable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,14 +13,20 @@ import java.util.List;
 @Slf4j
 public class ItemLevelActions extends WebActions{
 
+    private List<String> itemsLevels = new ArrayList<>();
+
     public ItemLevelActions(InitPages initPages) {
         super(initPages);
     }
 
-    public void logItemLevel(ItemDetailsPageable itemDetailsPageable) {
+    public void getItemLevel(ItemDetailsPageable itemDetailsPageable) {
         tabSwitchToGame();
         itemDetailsPageable.open();
-        log.info("Building:{}", itemDetailsPageable.getHeaderText());
+        itemsLevels.add(itemDetailsPageable.getHeaderText());
+    }
+
+    public void logItemsLevelsList(){
+        log.info("Items levels:{}", itemsLevels);
     }
 
     public List<ItemDetailsPageable> getItemsPages() {

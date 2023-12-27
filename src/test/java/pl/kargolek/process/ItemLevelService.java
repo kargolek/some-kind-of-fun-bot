@@ -15,6 +15,7 @@ public class ItemLevelService {
 
     public void logItemsLevels(){
         itemLevelActions.getItemsPages()
-                .forEach(itemLevelActions::logItemLevel);
+                .forEach(itemLevelActions::getItemLevel);
+        itemLevelActions.logItemsLevelsList();
     }
 }

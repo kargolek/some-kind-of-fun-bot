@@ -23,6 +23,8 @@ public class UpgradeBuildingsService {
                 upgradeBuildingsAction.getItemUpgradePages()
                         .forEach(upgradeBuildingsAction::upgradeBuildingsProcess);
             }
+        } else {
+            log.info("Upgrade process has been skipped");
         }
     }
 }

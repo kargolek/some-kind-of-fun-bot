@@ -29,17 +29,20 @@ public class WarService {
 
     public void recruitSoldiers(boolean canWeAttackOpponents) throws InterruptedException {
         log.info("Can we attack our opponents: {}", canWeAttackOpponents);
-        if (!canWeAttackOpponents){
+        if (!canWeAttackOpponents) {
             log.info("We are recruiting our soldiers");
             yourCampActions.recruitSoldiers();
         }
     }
 
-    public void attackOpponentsCampAndRecruit(boolean canWeAttackOpponents, boolean exceedMinResourceReq) throws InterruptedException {
-        if (canWeAttackOpponents && exceedMinResourceReq){
+    public void attackOpponentsCampAndRecruit(boolean canWeAttackOpponents, boolean exceedMinResourceReq)
+            throws InterruptedException {
+        if (canWeAttackOpponents && exceedMinResourceReq) {
             log.info("We are attacking opponents camp and recruiting our soldiers");
             opponentsCampActions.attackOpponentsCamp();
             yourCampActions.recruitSoldiers();
+        } else {
+            log.info("Attack and recruit process has been skipped.");
         }
     }
 
