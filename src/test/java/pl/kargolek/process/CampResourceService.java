@@ -29,6 +29,16 @@ public class CampResourceService {
         var stoneResult = campResources.stone() / treasuryMaxResource.stone();
         var goldResult = campResources.gold() / treasuryMaxResource.gold();
 
+        log.info("CampResources: Wood:{}, Stone:{}, Gold:{} Gem:{} Experience:{}",
+                campResources.wood(),
+                campResources.stone(),
+                campResources.gold(),
+                campResources.gem(),
+                campResources.experience());
+        log.info("TreasuryMaxResource: Wood:{}, Stone:{}, Gold:{}",
+                treasuryMaxResource.wood(),
+                treasuryMaxResource.stone(),
+                treasuryMaxResource.gold());
         log.info("Camp Treasury Resource Ratio: Wood:{}, Stone:{}, Gold:{}, Ratio:{}",
                 woodResult,
                 stoneResult,

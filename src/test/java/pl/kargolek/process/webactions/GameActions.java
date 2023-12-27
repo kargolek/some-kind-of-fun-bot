@@ -7,6 +7,9 @@ import pl.kargolek.process.data.CampResources;
 import pl.kargolek.process.data.TreasuryMaxResource;
 import pl.kargolek.util.WebDriverUtil;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Slf4j
 public class GameActions extends WebActions {
 
@@ -37,13 +40,22 @@ public class GameActions extends WebActions {
         var gem = experiencePanelPage.getGemValue();
         var experience = experiencePanelPage.getExperienceValue();
 
-        log.info("CampResources: Wood:{}, Stone:{}, Gold:{} Gem:{} Experience:{}", wood, stone, gold, gem, experience);
         return new CampResources(
                 Double.parseDouble(wood),
                 Double.parseDouble(stone),
                 Double.parseDouble(gold),
-                Double.parseDouble(gem)
+                Double.parseDouble(gem),
+                getExperience(experience)
         );
+    }
+
+    private Integer getExperience(String experience) {
+        Pattern pattern = Pattern.compile("(\\d+)");
+        Matcher matcher = pattern.matcher(experience);
+        if (matcher.find()){
+            return Integer.parseInt(matcher.group(1));
+        }
+        return 0;
     }
 
     public TreasuryMaxResource openTreasuryAndGetMaxResourcesValue() throws InterruptedException {
@@ -59,7 +71,6 @@ public class GameActions extends WebActions {
         var stone = treasuryDetailPage.getStoneValue();
         var gold = treasuryDetailPage.getGoldValue();
 
-        log.info("TreasuryMaxResource: Wood:{}, Stone:{}, Gold:{}", wood, stone, gold);
         return new TreasuryMaxResource(
                 Double.parseDouble(wood),
                 Double.parseDouble(stone),
