@@ -27,6 +27,7 @@ public class BasePage {
     public final FluentWait<WebDriver> fluentWait;
 
     final Duration timeoutDefault = Duration.ofSeconds(15);
+    final Duration timeout10Sec = Duration.ofSeconds(10);
     final Duration timeout5Sec = Duration.ofSeconds(5);
     final Duration timeout1Sec = Duration.ofSeconds(1);
 

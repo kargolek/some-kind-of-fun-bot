@@ -3,6 +3,7 @@ package pl.kargolek.process.webactions;
 import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
 import pl.kargolek.pages.game.details.ItemDetailsPageable;
+import pl.kargolek.pages.game.modal.UpgradeModalPage;
 
 import java.util.List;
 
@@ -18,18 +19,13 @@ public class UpgradeBuildingsAction extends WebActions {
     }
 
     public void upgradeBuildingsProcess(ItemDetailsPageable itemDetailsPageable) {
-        var pageableCLassName = itemDetailsPageable.getClass().getSimpleName();
-        log.info("Start upgrade building process for:{}", pageableCLassName);
         tabSwitchToGame();
         itemDetailsPageable.open();
         if (!itemDetailsPageable.isUpgradeButtonNotAvailable()){
             var upgradeModalPage = itemDetailsPageable.clickUpgradeButton();
             if (upgradeModalPage.isOpenQueueButtonNotAvailable()){
-                upgradeModalPage.clickUpgradeButton();
-                log.info("Item: {} upgrade process has been started", pageableCLassName);
+                startUpgradeInModalPage(upgradeModalPage, itemDetailsPageable);
             }
-        } else {
-            log.info("Upgrade button not available for {}", pageableCLassName);
         }
     }
 
@@ -42,5 +38,13 @@ public class UpgradeBuildingsAction extends WebActions {
                 initPages.getMarketDetailViewPage(),
                 initPages.getTempleDetailViewPage(),
                 initPages.getWallDetailViewPage());
+    }
+
+    private void startUpgradeInModalPage(UpgradeModalPage upgradeModalPage, ItemDetailsPageable itemDetailsPageable){
+        if (upgradeModalPage.isUpgradeButtonAvailable()){
+            upgradeModalPage.clickUpgradeButton();
+            log.info("Item: {} upgrade process has been started",
+                    itemDetailsPageable.getClass().getSimpleName());
+        }
     }
 }

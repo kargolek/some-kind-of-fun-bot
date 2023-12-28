@@ -27,8 +27,12 @@ public class UpgradeModalPage extends BasePage {
         return new BuildingQueueModalPage(driver);
     }
 
+    public boolean isUpgradeButtonAvailable(){
+        return this.waitForElementsVisibilityIgnoreTimeout(upgradeButton, getTimeout10Sec())
+                .size() > 0;
+    }
+
     public boolean isOpenQueueButtonNotAvailable(){
         return waitForElementsVisibilityIgnoreTimeout(openQueueButton, getTimeout5Sec()).isEmpty();
     }
-
 }
