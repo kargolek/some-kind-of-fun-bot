@@ -61,7 +61,7 @@ public class GameTest {
 
     @AfterAll
     public static void tearDownClass(){
-        log.info("##### SUMMARY #####/n");
+        log.info("##### BATTLE SUMMARY #####");
         battlesOutcomes.forEach((warName, battleOutcome) ->{
             if (battleOutcome.warTakePlace()){
               log.info("Battle results for {} Wood:{} Stone:{}, Gold:{} Gem:{} Experience:{} Units Lost:{}",

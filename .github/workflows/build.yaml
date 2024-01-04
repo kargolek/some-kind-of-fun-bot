@@ -28,8 +28,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  schedule:
-    - cron: '0 */1 * * *'
+#  schedule:
+#    - cron: '0 */1 * * *'
 
 jobs:
   build:
