@@ -2,6 +2,7 @@ package pl.kargolek.process;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import pl.kargolek.process.data.BattleOutcome;
 import pl.kargolek.process.data.CampResources;
 import pl.kargolek.process.data.CampSlots;
 import pl.kargolek.process.map.MapData;
@@ -16,12 +17,12 @@ public class WarService {
     private final YourCampActions yourCampActions;
     private final OpponentsCampActions opponentsCampActions;
 
-    public boolean canWeAttackOpponents() {
+    public boolean canWeAttackOpponents() throws InterruptedException {
         yourCampActions.claimSoldiers();
         var yourCampSlots = getCampSlots();
         var isOccupiedSlotsReach = isOccupiedSlotsReachMinValue(yourCampSlots);
         var isAvailableSlotsReach = isAvailableSlotsReachMinValue(yourCampSlots);
-        if (!isOccupiedSlotsReach){
+        if (!isOccupiedSlotsReach) {
             return false;
         } else {
             return isAvailableSlotsReach;
@@ -36,8 +37,12 @@ public class WarService {
         }
     }
 
-    public void attackOpponentsCampAndRecruit(boolean canWeAttackOpponents, boolean exceedMinResourceReq)
+    public BattleOutcome attackOpponentsCampAndRecruit(boolean canWeAttackOpponents, boolean exceedMinResourceReq)
             throws InterruptedException {
+
+        BattleOutcome battleOutcome = new BattleOutcome(false,
+                new CampResources(0, 0, 0, 0, 0), 0);
+
         if (canWeAttackOpponents && exceedMinResourceReq) {
             var beforeCampResources = gameActions.openGameLogExperienceInfo();
             var beforeAvailableUnits = yourCampActions.sumUnits();
@@ -48,13 +53,17 @@ public class WarService {
             var afterCampResources = gameActions.openGameLogExperienceInfo();
             var afterAvailableUnits = yourCampActions.sumUnits();
 
-            this.logResourcesAfterWar(beforeCampResources, afterCampResources);
-            this.logUnitsAfterWar(beforeAvailableUnits, afterAvailableUnits);
+            var resourcesResults = this.logResourcesAfterWar(beforeCampResources, afterCampResources);
+            var unitsResults = this.logUnitsAfterWar(beforeAvailableUnits, afterAvailableUnits);
+            battleOutcome = new BattleOutcome(true, resourcesResults, unitsResults);
 
             yourCampActions.recruitSoldiers();
+
         } else {
             log.info("Attack and recruit process has been skipped.");
         }
+
+        return battleOutcome;
     }
 
     private boolean isOccupiedSlotsReachMinValue(CampSlots campSlots) {
@@ -67,7 +76,7 @@ public class WarService {
         return isExceedMinimalValue;
     }
 
-    private boolean isAvailableSlotsReachMinValue(CampSlots campSlots){
+    private boolean isAvailableSlotsReachMinValue(CampSlots campSlots) throws InterruptedException {
         var currentAvailableSoldiers = yourCampActions.sumUnits();
         var diffMaxSlotsCurrentAvailableSoldiers = campSlots.getMaxSlots() - currentAvailableSoldiers;
         var isExceedMinimalValue = diffMaxSlotsCurrentAvailableSoldiers < 4;
@@ -83,7 +92,7 @@ public class WarService {
         return MapData.mapCampSlots(yourCampDetailPage.getSlotsOccupiedText());
     }
 
-    private void logResourcesAfterWar(CampResources beforeCampResource, CampResources afterCampResource) {
+    private CampResources logResourcesAfterWar(CampResources beforeCampResource, CampResources afterCampResource) {
         var wood = afterCampResource.wood() - beforeCampResource.wood();
         var stone = afterCampResource.stone() - beforeCampResource.stone();
         var gold = afterCampResource.gold() - beforeCampResource.gold();
@@ -96,11 +105,13 @@ public class WarService {
                 gold,
                 gem,
                 experience);
+        return new CampResources(wood, stone, gold, gem, experience);
     }
 
-    private void logUnitsAfterWar(Integer beforeUnits, Integer afterUnits){
+    private Integer logUnitsAfterWar(Integer beforeUnits, Integer afterUnits) {
         var units = afterUnits - beforeUnits;
         log.info("Battle outcome units after war: {}", units);
+        return units;
     }
 
 }

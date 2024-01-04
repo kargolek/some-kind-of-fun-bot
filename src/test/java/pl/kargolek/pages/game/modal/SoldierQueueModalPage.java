@@ -27,6 +27,7 @@ public class SoldierQueueModalPage extends BasePage {
     }
 
     public YourCampDetailPage clickCloseModalButton() {
+        getTitleHeader();
         waitForElementClickable(closeModalButton, getTimeoutDefault())
                 .click();
         return new YourCampDetailPage(driver);

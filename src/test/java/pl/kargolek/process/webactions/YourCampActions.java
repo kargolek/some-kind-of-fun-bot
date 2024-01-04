@@ -26,6 +26,7 @@ public class YourCampActions extends WebActions {
     }
 
     private void recruitSoldierProcess(Soldier soldier) throws InterruptedException {
+        log.info("Recruit: {}", soldier.toString());
         var isRecruitEnable = initPages.getYourCampDetailPage()
                 .clickMaxButton(soldier)
                 .isRecruitButtonEnable(soldier);
@@ -53,10 +54,12 @@ public class YourCampActions extends WebActions {
                 .clickCloseModalButton();
     }
 
-    public Integer sumUnits() {
+    public Integer sumUnits() throws InterruptedException {
         tabSwitchToGame();
         var yourCampDetailPage = initPages.getYourCampDetailPage()
                 .open();
+
+        Thread.sleep(1000);
 
         var militia = yourCampDetailPage.getAmountSoldierText(Soldier.Militia);
         var acolyte = yourCampDetailPage.getAmountSoldierText(Soldier.Acolyte);
