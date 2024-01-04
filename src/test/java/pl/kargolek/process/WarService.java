@@ -110,7 +110,7 @@ public class WarService {
 
     private Integer logUnitsAfterWar(Integer beforeUnits, Integer afterUnits) {
         var units = afterUnits - beforeUnits;
-        log.info("Battle outcome units after war: {}", units);
+        log.info("Battle outcome unitsLost after war: {}", units);
         return units;
     }
 

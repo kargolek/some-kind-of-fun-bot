@@ -2,6 +2,8 @@ package pl.kargolek.process;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import pl.kargolek.process.data.BaseRequirements;
+import pl.kargolek.process.data.CampResourceRatio;
 import pl.kargolek.process.data.CampResources;
 import pl.kargolek.process.data.TreasuryMaxResource;
 import pl.kargolek.process.webactions.GameActions;
@@ -15,15 +17,16 @@ public class CampResourceService {
 
     private GameActions gameActions;
 
-    public boolean isExceedMinRequirements(double minResourceRatio) throws InterruptedException {
+    public BaseRequirements getBaseRequirementsResult(double minResourceRatio) throws InterruptedException {
         var campResources = gameActions.openGameLogExperienceInfo();
         var treasuryMaxResources = gameActions.openTreasuryAndGetMaxResourcesValue();
-        return isRationExceedRequirementsValue(campResources, treasuryMaxResources, minResourceRatio);
+        var campResourceRatio = getCampResourceRatio(campResources, treasuryMaxResources, minResourceRatio);
+        return new BaseRequirements(campResourceRatio, campResources, treasuryMaxResources);
     }
 
-    private boolean isRationExceedRequirementsValue(CampResources campResources,
-                                                    TreasuryMaxResource treasuryMaxResource,
-                                                    double minResourceRatio) {
+    private CampResourceRatio getCampResourceRatio(CampResources campResources,
+                                                   TreasuryMaxResource treasuryMaxResource,
+                                                   double minResourceRatio) {
 
         var woodResult = campResources.wood() / treasuryMaxResource.wood();
         var stoneResult = campResources.stone() / treasuryMaxResource.stone();
@@ -50,6 +53,6 @@ public class CampResourceService {
                 goldResult > minResourceRatio;
 
         log.info("Min resource requirements exceed:{}", isExceedMinReq);
-        return isExceedMinReq;
+        return new CampResourceRatio(isExceedMinReq, woodResult, stoneResult, goldResult, minResourceRatio);
     }
 }

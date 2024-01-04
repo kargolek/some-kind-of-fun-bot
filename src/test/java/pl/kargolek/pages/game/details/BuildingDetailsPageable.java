@@ -6,7 +6,7 @@ import pl.kargolek.pages.game.modal.UpgradeModalPage;
 /**
  * @author Karol Kuta-Orlowicz
  */
-public interface ItemDetailsPageable {
+public interface BuildingDetailsPageable {
 
     BasePage open();
     UpgradeModalPage clickUpgradeButton();

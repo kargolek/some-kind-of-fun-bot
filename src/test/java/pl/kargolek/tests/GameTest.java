@@ -11,12 +11,9 @@ import pl.kargolek.extension.pages.InitPageObject;
 import pl.kargolek.extension.properties.TestProperties;
 import pl.kargolek.pages.InitPages;
 import pl.kargolek.process.*;
-import pl.kargolek.process.data.BattleOutcome;
+import pl.kargolek.process.data.Summary;
 import pl.kargolek.process.webactions.*;
 import pl.kargolek.util.TestProperty;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @SeleniumWebDriver
 @InitPageObject
@@ -31,7 +28,10 @@ public class GameTest {
     private CampResourceService campResourceService;
     private UpgradeBuildingsService upgradeBuildingsService;
 
-    private final static Map<String, BattleOutcome> battlesOutcomes = new HashMap<>();
+    private BuildingLevelService buildingLevelService;
+
+    private static final SummaryService summaryService = SummaryService.getInstance();
+    private static Summary summary;
 
     @BeforeEach
     public void setup(TestProperty testProperty, InitPages pages) {
@@ -43,6 +43,7 @@ public class GameTest {
         var opponentsCampActions = new OpponentsCampActions(pages);
         var buildingQueueActions = new BuildingQueueActions(pages);
         var upgradeBuildingActions = new UpgradeBuildingsAction(pages);
+        var itemLevelActions = new BuildingLevelActions(pages);
 
         warService = new WarService(gameActions,
                 yourCampActions,
@@ -50,149 +51,82 @@ public class GameTest {
         gameService = new GameService(gameActions, walletActions);
         campResourceService = new CampResourceService(gameActions);
         upgradeBuildingsService = new UpgradeBuildingsService(buildingQueueActions, upgradeBuildingActions);
+        buildingLevelService = new BuildingLevelService(itemLevelActions);
+
+        summary = new Summary();
     }
 
     @AfterEach
-    public void tearDownEach(InitPages pages) throws InterruptedException {
-        var itemLevelActions = new ItemLevelActions(pages);
-        new ItemLevelService(itemLevelActions).logItemsLevels();
-        upgradeBuildingsService.logBuildingQueueList();
+    public void tearDownEach() throws InterruptedException {
+        var buildingsLevels = buildingLevelService.getBuildingsLevels();
+        var buildingsQueue = upgradeBuildingsService.getBuildingQueueList();
+
+        summary.setBuildingLevels(buildingsLevels);
+        summary.setBuildingsQueue(buildingsQueue);
+
+        summaryService.put(summary);
     }
 
     @AfterAll
     public static void tearDownClass(){
-        log.info("##### BATTLE SUMMARY #####");
-        battlesOutcomes.forEach((warName, battleOutcome) ->{
-            if (battleOutcome.warTakePlace()){
-              log.info("Battle results for {} Wood:{} Stone:{}, Gold:{} Gem:{} Experience:{} Units Lost:{}",
-                      warName,
-                      battleOutcome.campResources().wood(),
-                      battleOutcome.campResources().stone(),
-                      battleOutcome.campResources().gold(),
-                      battleOutcome.campResources().gem(),
-                      battleOutcome.campResources().experience(),
-                      battleOutcome.units());
-            }
-        });
-        log.info("##### END SUMMARY #####");
+        summaryService.logSummary();
     }
 
     @Test
     public void test_war_1() throws InterruptedException {
-        var warName = "test war 1";
-        log.info("Starting {}", warName);
-
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        var battleOutcome = warService.attackOpponentsCampAndRecruit(canWeAttackOpponents,
-                exceedMinRequirements);
-        battlesOutcomes.put(warName, battleOutcome);
+        testWarProcedure(System.getenv("SEC_PHRASE"), password, "test war 1", 0.5);
     }
 
     @Test
     public void test_war_2() throws InterruptedException {
-        var warName = "test war 2";
-        log.info("Starting {}", warName);
-
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_2"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        var battleOutcome = warService.attackOpponentsCampAndRecruit(canWeAttackOpponents,
-                exceedMinRequirements);
-        battlesOutcomes.put(warName, battleOutcome);
+        testWarProcedure(System.getenv("SEC_PHRASE_2"), password, "test war 2", 0.5);
     }
 
     @Test
     public void test_war_3() throws InterruptedException {
-        var warName = "test war 3";
-        log.info("Starting {}", warName);
-
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_3"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.5);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        var battleOutcome = warService.attackOpponentsCampAndRecruit(canWeAttackOpponents,
-                exceedMinRequirements);
-        battlesOutcomes.put(warName, battleOutcome);
+        testWarProcedure(System.getenv("SEC_PHRASE_3"), password, "test war 3", 0.5);
     }
 
     @Test
     public void test_war_4() throws InterruptedException {
-        var warName = "test war 4";
-        log.info("Starting {}", warName);
-
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_4"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.4);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        var battleOutcome = warService.attackOpponentsCampAndRecruit(canWeAttackOpponents,
-                exceedMinRequirements);
-        battlesOutcomes.put(warName, battleOutcome);
+        testWarProcedure(System.getenv("SEC_PHRASE_4"), password, "test war 4", 0.4);
     }
 
     @Test
     public void test_war_5() throws InterruptedException {
-        var warName = "test war 5";
-        log.info("Starting {}", warName);
-
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_5"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.3);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        var battleOutcome = warService.attackOpponentsCampAndRecruit(canWeAttackOpponents,
-                exceedMinRequirements);
-        battlesOutcomes.put(warName, battleOutcome);
+        testWarProcedure(System.getenv("SEC_PHRASE_5"), password, "test war 5", 0.3);
     }
 
     @Test
     public void test_war_6() throws InterruptedException {
-        var warName = "test war 6";
-        log.info("Starting {}", warName);
-
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_6"), password);
-
-        var canWeAttackOpponents = warService.canWeAttackOpponents();
-        warService.recruitSoldiers(canWeAttackOpponents);
-
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.3);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        var battleOutcome = warService.attackOpponentsCampAndRecruit(canWeAttackOpponents,
-                exceedMinRequirements);
-        battlesOutcomes.put(warName, battleOutcome);
+        testWarProcedure(System.getenv("SEC_PHRASE_6"), password, "test war 6", 0.3);
     }
 
     @Test
     public void test_war_7() throws InterruptedException {
-        var warName = "test war 7";
-        log.info("Starting {}", warName);
+        testWarProcedure(System.getenv("SEC_PHRASE_7"), password, "test war 7", 0.4);
+    }
 
-        gameService.connectAndLoginToGameAndWallet(System.getenv("SEC_PHRASE_7"), password);
+    private void testWarProcedure(String phrase, String password, String warName, double minResourceRatio)
+            throws InterruptedException {
+        log.info("Starting {}", warName);
+        summary.setWarName(warName);
+
+        gameService.connectAndLoginToGameAndWallet(phrase, password);
 
         var canWeAttackOpponents = warService.canWeAttackOpponents();
         warService.recruitSoldiers(canWeAttackOpponents);
 
-        var exceedMinRequirements = campResourceService.isExceedMinRequirements(0.4);
-        upgradeBuildingsService.runUpgradeProcess(exceedMinRequirements);
-        var battleOutcome = warService.attackOpponentsCampAndRecruit(canWeAttackOpponents,
-                exceedMinRequirements);
-        battlesOutcomes.put(warName, battleOutcome);
+        var baseRequirements = campResourceService.getBaseRequirementsResult(minResourceRatio);
+        var isRatioExceeded = baseRequirements.campResourceRatio().isRatioExceeded();
+        summary.setBaseRequirements(baseRequirements);
+
+        summary.setBuildingsUpgraded(
+                upgradeBuildingsService.runUpgradeProcess(isRatioExceeded)
+        );
+
+        summary.setBattleOutcome(
+                warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, isRatioExceeded)
+        );
     }
 }

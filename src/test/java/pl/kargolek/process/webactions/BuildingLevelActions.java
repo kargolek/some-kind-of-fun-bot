@@ -2,7 +2,7 @@ package pl.kargolek.process.webactions;
 
 import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
-import pl.kargolek.pages.game.details.ItemDetailsPageable;
+import pl.kargolek.pages.game.details.BuildingDetailsPageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,26 +11,27 @@ import java.util.List;
  * @author Karol Kuta-Orlowicz
  */
 @Slf4j
-public class ItemLevelActions extends WebActions{
+public class BuildingLevelActions extends WebActions{
 
-    private List<String> itemsLevels = new ArrayList<>();
+    private final List<String> itemsLevels = new ArrayList<>();
 
-    public ItemLevelActions(InitPages initPages) {
+    public BuildingLevelActions(InitPages initPages) {
         super(initPages);
     }
 
-    public void getItemLevel(ItemDetailsPageable itemDetailsPageable) {
+    public void getItemLevel(BuildingDetailsPageable buildingDetailsPageable) {
         tabSwitchToGame();
-        itemDetailsPageable.open();
-        itemsLevels.add(itemDetailsPageable.getHeaderText().replace(" ", "")
+        buildingDetailsPageable.open();
+        itemsLevels.add(buildingDetailsPageable.getHeaderText().replace(" ", "")
                 .replace("lvl", ""));
     }
 
-    public void logItemsLevelsList(){
+    public String getBuildingsLevelsList(){
         log.info("Items levels:{}", itemsLevels);
+        return String.join(", ", itemsLevels);
     }
 
-    public List<ItemDetailsPageable> getItemsPages() {
+    public List<BuildingDetailsPageable> getBuildingsPages() {
         return List.of(initPages.getGoldDetailViewPage(),
                 initPages.getTreasuryDetailViewPage(),
                 initPages.getAcademyDetailViewPage(),

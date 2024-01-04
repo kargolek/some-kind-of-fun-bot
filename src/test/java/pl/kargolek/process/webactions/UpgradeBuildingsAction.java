@@ -2,7 +2,7 @@ package pl.kargolek.process.webactions;
 
 import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
-import pl.kargolek.pages.game.details.ItemDetailsPageable;
+import pl.kargolek.pages.game.details.BuildingDetailsPageable;
 import pl.kargolek.pages.game.modal.UpgradeModalPage;
 
 import java.util.List;
@@ -18,18 +18,19 @@ public class UpgradeBuildingsAction extends WebActions {
         super(initPages);
     }
 
-    public void upgradeBuildingsProcess(ItemDetailsPageable itemDetailsPageable) {
+    public String upgradeBuildingsProcess(BuildingDetailsPageable buildingDetailsPageable) {
         tabSwitchToGame();
-        itemDetailsPageable.open();
-        if (!itemDetailsPageable.isUpgradeButtonNotAvailable()){
-            var upgradeModalPage = itemDetailsPageable.clickUpgradeButton();
+        buildingDetailsPageable.open();
+        if (!buildingDetailsPageable.isUpgradeButtonNotAvailable()){
+            var upgradeModalPage = buildingDetailsPageable.clickUpgradeButton();
             if (upgradeModalPage.isOpenQueueButtonNotAvailable()){
-                startUpgradeInModalPage(upgradeModalPage, itemDetailsPageable);
+                return startUpgradeInModalPage(upgradeModalPage, buildingDetailsPageable);
             }
         }
+        return "";
     }
 
-    public List<ItemDetailsPageable> getItemUpgradePages() {
+    public List<BuildingDetailsPageable> getItemUpgradePages() {
         return List.of(initPages.getGoldDetailViewPage(),
                 initPages.getTreasuryDetailViewPage(),
                 initPages.getAcademyDetailViewPage(),
@@ -40,11 +41,13 @@ public class UpgradeBuildingsAction extends WebActions {
                 initPages.getWallDetailViewPage());
     }
 
-    private void startUpgradeInModalPage(UpgradeModalPage upgradeModalPage, ItemDetailsPageable itemDetailsPageable){
-        if (upgradeModalPage.isUpgradeButtonAvailable()){
+    private String startUpgradeInModalPage(UpgradeModalPage upgradeModalPage, BuildingDetailsPageable buildingDetailsPageable) {
+        if (upgradeModalPage.isUpgradeButtonAvailable()) {
             upgradeModalPage.clickUpgradeButton();
             log.info("Item: {} upgrade process has been started",
-                    itemDetailsPageable.getClass().getSimpleName());
+                    buildingDetailsPageable.getClass().getSimpleName());
+            return buildingDetailsPageable.getClass().getSimpleName();
         }
+        return "";
     }
 }

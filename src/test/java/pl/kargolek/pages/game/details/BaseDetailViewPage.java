@@ -10,7 +10,7 @@ import pl.kargolek.pages.game.modal.UpgradeModalPage;
 import java.time.Duration;
 import java.util.List;
 
-public abstract class BaseDetailViewPage extends BasePage implements ItemDetailsPageable {
+public abstract class BaseDetailViewPage extends BasePage implements BuildingDetailsPageable {
 
     @FindBy(xpath = "//button[text()='Upgrade']")
     private WebElement upgradeButton;
