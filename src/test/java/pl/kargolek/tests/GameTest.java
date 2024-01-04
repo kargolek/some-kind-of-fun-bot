@@ -1,10 +1,7 @@
 package pl.kargolek.tests;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pl.kargolek.extension.driver.SeleniumWebDriver;
 import pl.kargolek.extension.javascript.JavascriptDriverExecutor;
 import pl.kargolek.extension.pages.InitPageObject;
@@ -26,12 +23,12 @@ public class GameTest {
     private WarService warService;
     private GameService gameService;
     private CampResourceService campResourceService;
-    private UpgradeBuildingsService upgradeBuildingsService;
+    private BuildingsUpgradeService buildingsUpgradeService;
 
     private BuildingLevelService buildingLevelService;
 
     private static final SummaryService summaryService = SummaryService.getInstance();
-    private static Summary summary;
+    private Summary summary;
 
     @BeforeEach
     public void setup(TestProperty testProperty, InitPages pages) {
@@ -42,7 +39,7 @@ public class GameTest {
         var walletActions = new WalletActions(pages);
         var opponentsCampActions = new OpponentsCampActions(pages);
         var buildingQueueActions = new BuildingQueueActions(pages);
-        var upgradeBuildingActions = new UpgradeBuildingsAction(pages);
+        var upgradeBuildingActions = new BuildingsUpgradeAction(pages);
         var itemLevelActions = new BuildingLevelActions(pages);
 
         warService = new WarService(gameActions,
@@ -50,7 +47,7 @@ public class GameTest {
                 opponentsCampActions);
         gameService = new GameService(gameActions, walletActions);
         campResourceService = new CampResourceService(gameActions);
-        upgradeBuildingsService = new UpgradeBuildingsService(buildingQueueActions, upgradeBuildingActions);
+        buildingsUpgradeService = new BuildingsUpgradeService(buildingQueueActions, upgradeBuildingActions);
         buildingLevelService = new BuildingLevelService(itemLevelActions);
 
         summary = new Summary();
@@ -59,7 +56,7 @@ public class GameTest {
     @AfterEach
     public void tearDownEach() throws InterruptedException {
         var buildingsLevels = buildingLevelService.getBuildingsLevels();
-        var buildingsQueue = upgradeBuildingsService.getBuildingQueueList();
+        var buildingsQueue = buildingsUpgradeService.getBuildingQueueList();
 
         summary.setBuildingLevels(buildingsLevels);
         summary.setBuildingsQueue(buildingsQueue);
@@ -122,7 +119,7 @@ public class GameTest {
         summary.setBaseRequirements(baseRequirements);
 
         summary.setBuildingsUpgraded(
-                upgradeBuildingsService.runUpgradeProcess(isRatioExceeded)
+                buildingsUpgradeService.runUpgradeProcess(isRatioExceeded)
         );
 
         summary.setBattleOutcome(

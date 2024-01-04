@@ -3,7 +3,7 @@ package pl.kargolek.process;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.process.webactions.BuildingQueueActions;
-import pl.kargolek.process.webactions.UpgradeBuildingsAction;
+import pl.kargolek.process.webactions.BuildingsUpgradeAction;
 
 import java.util.stream.Collectors;
 
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @AllArgsConstructor
-public class UpgradeBuildingsService {
+public class BuildingsUpgradeService {
 
     private BuildingQueueActions buildingQueueActions;
-    private UpgradeBuildingsAction upgradeBuildingsAction;
+    private BuildingsUpgradeAction buildingsUpgradeAction;
 
     public String runUpgradeProcess(boolean exceedMinResourceReq) throws InterruptedException {
         if (exceedMinResourceReq) {
@@ -23,9 +23,9 @@ public class UpgradeBuildingsService {
             if (buildingQueueSize.equals(0)) {
                 log.info("Start upgrade process");
 
-                return upgradeBuildingsAction.getItemUpgradePages()
+                return buildingsUpgradeAction.getItemUpgradePages()
                         .stream()
-                        .map(upgradeBuildingsAction::upgradeBuildingsProcess)
+                        .map(buildingsUpgradeAction::upgradeBuildingsProcess)
                         .filter(e -> !e.equals(""))
                         .collect(Collectors.joining(" "));
             }

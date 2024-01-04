@@ -12,9 +12,9 @@ import java.util.List;
  */
 
 @Slf4j
-public class UpgradeBuildingsAction extends WebActions {
+public class BuildingsUpgradeAction extends WebActions {
 
-    public UpgradeBuildingsAction(InitPages initPages) {
+    public BuildingsUpgradeAction(InitPages initPages) {
         super(initPages);
     }
 
@@ -38,7 +38,8 @@ public class UpgradeBuildingsAction extends WebActions {
                 initPages.getQuarryDetailViewPage(),
                 initPages.getMarketDetailViewPage(),
                 initPages.getTempleDetailViewPage(),
-                initPages.getWallDetailViewPage());
+                initPages.getWallDetailViewPage(),
+                initPages.getYourCampDetailPage());
     }
 
     private String startUpgradeInModalPage(UpgradeModalPage upgradeModalPage, BuildingDetailsPageable buildingDetailsPageable) {
