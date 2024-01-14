@@ -32,14 +32,14 @@ public class BuildingsUpgradeAction extends WebActions {
 
     public List<BuildingDetailsPageable> getItemUpgradePages() {
         return List.of(initPages.getGoldDetailViewPage(),
-                initPages.getTreasuryDetailViewPage(),
                 initPages.getAcademyDetailViewPage(),
                 initPages.getTimberCampDetailViewPage(),
                 initPages.getQuarryDetailViewPage(),
                 initPages.getMarketDetailViewPage(),
                 initPages.getTempleDetailViewPage(),
                 initPages.getWallDetailViewPage(),
-                initPages.getYourCampDetailPage());
+                initPages.getYourCampDetailPage(),
+                initPages.getTreasuryDetailViewPage());
     }
 
     private String startUpgradeInModalPage(UpgradeModalPage upgradeModalPage, BuildingDetailsPageable buildingDetailsPageable) {
