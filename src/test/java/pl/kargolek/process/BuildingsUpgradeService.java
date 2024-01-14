@@ -29,7 +29,14 @@ public class BuildingsUpgradeService {
             if (buildingQueueSize.equals(0)) {
                 log.info("Start upgrade process");
 
-                return getFilteredBuildingPageable(currentBuildingLevels, maxBuildingLevels)
+                var filteredBuildingsPage =
+                        getFilteredBuildingPageable(currentBuildingLevels, maxBuildingLevels);
+
+                log.info("Filtered building pages: {}", filteredBuildingsPage.stream()
+                        .map(buildingDetailsPageable -> buildingDetailsPageable.getBuildingType().getName())
+                        .collect(Collectors.joining(" ")));
+
+                return filteredBuildingsPage
                         .stream()
                         .map(buildingsUpgradeAction::upgradeBuildingsProcess)
                         .filter(e -> !e.equals(""))
@@ -50,15 +57,13 @@ public class BuildingsUpgradeService {
     private List<BuildingDetailsPageable> getFilteredBuildingPageable(List<BuildingLevel> currentBuildingLevels,
                                                                       List<BuildingLevel> maxBuildingLevels) {
         var senateLevel = getBuildingLevel(currentBuildingLevels, Building.SENATE);
-        var filteredBuildingPageable = buildingsUpgradeAction.getItemUpgradePages()
+        return buildingsUpgradeAction.getItemUpgradePages()
                 .stream()
                 .filter(buildingDetailsPageable -> isCurrentLevelBelowMaxAboveSenateLevel(
                         getBuildingLevel(currentBuildingLevels, buildingDetailsPageable.getBuildingType()),
                         senateLevel,
                         getBuildingLevel(maxBuildingLevels, buildingDetailsPageable.getBuildingType())
                 )).collect(Collectors.toList());
-        log.info("Filtered list: {}", filteredBuildingPageable);
-        return filteredBuildingPageable;
     }
 
     private int getBuildingLevel(List<BuildingLevel> buildingLevels, Building building) {

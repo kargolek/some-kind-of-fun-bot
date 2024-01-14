@@ -48,21 +48,11 @@ public class WarService {
             var beforeAvailableUnits = yourCampActions.sumUnits();
 
             log.info("We are attacking opponents camp and recruiting our soldiers");
-            opponentsCampActions.attackOpponentsCamp();
-
-            var afterCampResources = gameActions.openGameLogExperienceInfo();
-            var afterAvailableUnits = yourCampActions.sumUnits();
-
-            var resourcesResults = this.logResourcesAfterWar(beforeCampResources, afterCampResources);
-            var unitsResults = this.logUnitsAfterWar(beforeAvailableUnits, afterAvailableUnits);
-            battleOutcome = new BattleOutcome(true, resourcesResults, unitsResults);
+            battleOutcome = attackProcedure(beforeCampResources, beforeAvailableUnits);
 
             if (battleOutcome.unitsLost() == 0){
-                log.info("Repeat attack opponents, because unitLost=0 in previous attack");
-                opponentsCampActions.attackOpponentsCamp();
-                resourcesResults = this.logResourcesAfterWar(beforeCampResources, afterCampResources);
-                unitsResults = this.logUnitsAfterWar(beforeAvailableUnits, afterAvailableUnits);
-                battleOutcome = new BattleOutcome(true, resourcesResults, unitsResults);
+                log.info("Repeat attack opponents, because we didn't lost our units in previous attack");
+                battleOutcome = attackProcedure(beforeCampResources, beforeAvailableUnits);
             }
             yourCampActions.recruitSoldiers();
 
@@ -71,6 +61,17 @@ public class WarService {
         }
 
         return battleOutcome;
+    }
+
+    private BattleOutcome attackProcedure(CampResources beforeCampResources, int units) throws InterruptedException {
+        opponentsCampActions.attackOpponentsCamp();
+
+        var afterCampResources = gameActions.openGameLogExperienceInfo();
+        var afterAvailableUnits = yourCampActions.sumUnits();
+
+        var resourcesResults = this.logResourcesAfterWar(beforeCampResources, afterCampResources);
+        var unitsResults = this.logUnitsAfterWar(units, afterAvailableUnits);
+        return new BattleOutcome(true, resourcesResults, unitsResults);
     }
 
     private boolean isOccupiedSlotsReachMinValue(CampSlots campSlots) {

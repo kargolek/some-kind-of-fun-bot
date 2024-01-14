@@ -26,7 +26,6 @@ public class MapData {
     public static Building mapBuilding(String name){
         name = name.toUpperCase();
         for (Building building : Building.values()) {
-            log.info("Building: {}, Name:{}", building, name);
             if (building.name().equals(name)) {
                 return building;
             }
