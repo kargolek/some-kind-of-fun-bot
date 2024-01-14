@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
 import pl.kargolek.pages.game.details.BuildingDetailsPageable;
 import pl.kargolek.pages.game.modal.UpgradeModalPage;
+import pl.kargolek.process.data.BuildingLevel;
 
 import java.util.List;
 
@@ -51,4 +52,5 @@ public class BuildingsUpgradeAction extends WebActions {
         }
         return "";
     }
+
 }

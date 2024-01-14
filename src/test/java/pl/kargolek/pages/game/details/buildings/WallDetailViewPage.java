@@ -2,6 +2,7 @@ package pl.kargolek.pages.game.details.buildings;
 
 import org.openqa.selenium.WebDriver;
 import pl.kargolek.pages.game.details.BaseDetailViewPage;
+import pl.kargolek.process.enums.Building;
 import pl.kargolek.util.TestProperty;
 
 /**
@@ -20,7 +21,7 @@ public class WallDetailViewPage extends BaseDetailViewPage {
     }
 
     @Override
-    public String extractHeaderTextPattern() {
-        return "Wall";
+    public Building getBuildingType() {
+        return Building.WALL;
     }
 }

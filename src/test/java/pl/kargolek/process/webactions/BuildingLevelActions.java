@@ -3,9 +3,13 @@ package pl.kargolek.process.webactions;
 import lombok.extern.slf4j.Slf4j;
 import pl.kargolek.pages.InitPages;
 import pl.kargolek.pages.game.details.BuildingDetailsPageable;
+import pl.kargolek.process.data.BuildingLevel;
+import pl.kargolek.process.enums.Building;
+import pl.kargolek.process.map.MapData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Karol Kuta-Orlowicz
@@ -26,9 +30,15 @@ public class BuildingLevelActions extends WebActions{
                 .replace("lvl", ""));
     }
 
-    public String getBuildingsLevelsList(){
+    public List<BuildingLevel> getBuildingsLevelsList(){
         log.info("Items levels:{}", itemsLevels);
-        return String.join(", ", itemsLevels);
+        return itemsLevels.stream()
+                .map(item -> {
+                    String[] parts = item.split("-");
+                    String name = parts[0];
+                    int level = Integer.parseInt(parts[1]);
+                    return new BuildingLevel(MapData.mapBuilding(name), level);
+                }).collect(Collectors.toList());
     }
 
     public List<BuildingDetailsPageable> getBuildingsPages() {
@@ -43,4 +53,5 @@ public class BuildingLevelActions extends WebActions{
                 initPages.getYourCampDetailPage(),
                 initPages.getSenateDetailViewPage());
     }
+
 }

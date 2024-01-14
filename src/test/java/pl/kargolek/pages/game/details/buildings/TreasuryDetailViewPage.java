@@ -3,6 +3,7 @@ package pl.kargolek.pages.game.details.buildings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pl.kargolek.pages.game.details.BaseDetailViewPage;
+import pl.kargolek.process.enums.Building;
 import pl.kargolek.util.TestProperty;
 
 /**
@@ -21,8 +22,8 @@ public class TreasuryDetailViewPage extends BaseDetailViewPage {
     }
 
     @Override
-    public String extractHeaderTextPattern() {
-        return "Treasury";
+    public Building getBuildingType() {
+        return Building.TREASURY;
     }
 
     public String getWoodValue() {

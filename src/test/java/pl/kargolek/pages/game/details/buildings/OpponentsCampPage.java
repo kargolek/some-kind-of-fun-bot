@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import pl.kargolek.pages.game.details.BaseDetailViewPage;
 import pl.kargolek.pages.game.modal.TroopsModalPage;
+import pl.kargolek.process.enums.Building;
 import pl.kargolek.util.TestProperty;
 
 public class OpponentsCampPage extends BaseDetailViewPage {
@@ -21,8 +22,8 @@ public class OpponentsCampPage extends BaseDetailViewPage {
     }
 
     @Override
-    public String extractHeaderTextPattern() {
-        return "Barbarian Camp";
+    public Building getBuildingType() {
+        return Building.BARBARIAN_CAMP;
     }
 
     public TroopsModalPage clickAttackButton(){

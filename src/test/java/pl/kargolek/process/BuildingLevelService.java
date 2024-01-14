@@ -1,6 +1,9 @@
 package pl.kargolek.process;
 
+import pl.kargolek.process.data.BuildingLevel;
 import pl.kargolek.process.webactions.BuildingLevelActions;
+
+import java.util.List;
 
 /**
  * @author Karol Kuta-Orlowicz
@@ -13,7 +16,7 @@ public class BuildingLevelService {
         this.buildingLevelActions = buildingLevelActions;
     }
 
-    public String getBuildingsLevels(){
+    public List<BuildingLevel> getBuildingsLevels(){
         buildingLevelActions.getBuildingsPages()
                 .forEach(buildingLevelActions::getItemLevel);
         return buildingLevelActions.getBuildingsLevelsList();

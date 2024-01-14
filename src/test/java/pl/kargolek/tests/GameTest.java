@@ -1,16 +1,23 @@
 package pl.kargolek.tests;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pl.kargolek.extension.driver.SeleniumWebDriver;
 import pl.kargolek.extension.javascript.JavascriptDriverExecutor;
 import pl.kargolek.extension.pages.InitPageObject;
 import pl.kargolek.extension.properties.TestProperties;
 import pl.kargolek.pages.InitPages;
 import pl.kargolek.process.*;
+import pl.kargolek.process.data.BuildingLevel;
 import pl.kargolek.process.data.Summary;
+import pl.kargolek.process.enums.Building;
 import pl.kargolek.process.webactions.*;
 import pl.kargolek.util.TestProperty;
+
+import java.util.List;
 
 @SeleniumWebDriver
 @InitPageObject
@@ -29,6 +36,7 @@ public class GameTest {
 
     private static final SummaryService summaryService = SummaryService.getInstance();
     private Summary summary;
+    private List<BuildingLevel> maxBuildingLevels;
 
     @BeforeEach
     public void setup(TestProperty testProperty, InitPages pages) {
@@ -51,76 +59,86 @@ public class GameTest {
         buildingLevelService = new BuildingLevelService(itemLevelActions);
 
         summary = new Summary();
+
+        maxBuildingLevels = getMaxBuildingLevels(9, 9, 9, 1, 9, 9, 2,
+                1, 1);
     }
 
     @AfterEach
-    public void tearDownEach() throws InterruptedException {
-        var buildingsLevels = buildingLevelService.getBuildingsLevels();
-        var buildingsQueue = buildingsUpgradeService.getBuildingQueueList();
-
-        summary.setBuildingLevels(buildingsLevels);
-        summary.setBuildingsQueue(buildingsQueue);
-
+    public void tearDownEach() {
         summaryService.put(summary);
     }
 
     @AfterAll
-    public static void tearDownClass(){
+    public static void tearDownClass() {
         summaryService.logSummary();
     }
 
     @Test
     public void test_war_1() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE"), password, "test war 1", 0.3);
+        testWarProcedure(System.getenv("SEC_PHRASE"), password, "test war 1", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_2() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_2"), password, "test war 2", 0.3);
+        testWarProcedure(System.getenv("SEC_PHRASE_2"), password, "test war 2", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_3() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_3"), password, "test war 3", 0.4);
+        testWarProcedure(System.getenv("SEC_PHRASE_3"), password, "test war 3", 0.4,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_4() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_4"), password, "test war 4", 0.3);
+        testWarProcedure(System.getenv("SEC_PHRASE_4"), password, "test war 4", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_5() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_5"), password, "test war 5", 0.3);
+        testWarProcedure(System.getenv("SEC_PHRASE_5"), password, "test war 5", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_6() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_6"), password, "test war 6", 0.3);
+        testWarProcedure(System.getenv("SEC_PHRASE_6"), password, "test war 6", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_7() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_7"), password, "test war 7", 0.3);
+        testWarProcedure(System.getenv("SEC_PHRASE_7"), password, "test war 7", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_8() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_8"), password, "test war 8", 0.4);
+        testWarProcedure(System.getenv("SEC_PHRASE_8"), password, "test war 8", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_9() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_9"), password, "test war 9", 0.4);
+        testWarProcedure(System.getenv("SEC_PHRASE_9"), password, "test war 9", 0.3,
+                maxBuildingLevels);
     }
 
     @Test
     public void test_war_10() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_10"), password, "test war 10", 0.4);
+        testWarProcedure(System.getenv("SEC_PHRASE_10"), password, "test war 10", 0.4,
+                maxBuildingLevels);
     }
 
-    private void testWarProcedure(String phrase, String password, String warName, double minResourceRatio)
-            throws InterruptedException {
+    private void testWarProcedure(String phrase,
+                                  String password,
+                                  String warName,
+                                  double minResourceRatio,
+                                  List<BuildingLevel> maxBuildingLevels) throws InterruptedException {
         log.info("Starting {}", warName);
         summary.setWarName(warName);
 
@@ -133,12 +151,33 @@ public class GameTest {
         var isRatioExceeded = baseRequirements.campResourceRatio().isRatioExceeded();
         summary.setBaseRequirements(baseRequirements);
 
+        var buildingsLevels = buildingLevelService.getBuildingsLevels();
+        summary.setBuildingLevels(buildingsLevels.toString());
+
         summary.setBuildingsUpgraded(
-                buildingsUpgradeService.runUpgradeProcess(isRatioExceeded)
+                buildingsUpgradeService.runUpgradeProcess(isRatioExceeded, buildingsLevels, maxBuildingLevels)
         );
 
         summary.setBattleOutcome(
                 warService.attackOpponentsCampAndRecruit(canWeAttackOpponents, isRatioExceeded)
+        );
+
+        var buildingsQueue = buildingsUpgradeService.getBuildingQueueList();
+        summary.setBuildingsQueue(buildingsQueue);
+    }
+
+    private List<BuildingLevel> getMaxBuildingLevels(int academy, int barracks, int goldmine, int market, int quarry,
+                                                     int timber, int treasury, int temple, int wall) {
+
+        return List.of(new BuildingLevel(Building.ACADEMY, academy),
+                new BuildingLevel(Building.BARRACKS, barracks),
+                new BuildingLevel(Building.GOLDMINE, goldmine),
+                new BuildingLevel(Building.MARKET, market),
+                new BuildingLevel(Building.QUARRY, quarry),
+                new BuildingLevel(Building.TIMBERCAMP, timber),
+                new BuildingLevel(Building.TREASURY, treasury),
+                new BuildingLevel(Building.TEMPLE, temple),
+                new BuildingLevel(Building.WALL, wall)
         );
     }
 }

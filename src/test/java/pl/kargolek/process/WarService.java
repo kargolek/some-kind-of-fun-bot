@@ -41,7 +41,7 @@ public class WarService {
             throws InterruptedException {
 
         BattleOutcome battleOutcome = new BattleOutcome(false,
-                new CampResources(0, 0, 0, 0, 0), 0);
+                new CampResources(0, 0, 0, 0, 0), -1);
 
         if (canWeAttackOpponents && exceedMinResourceReq) {
             var beforeCampResources = gameActions.openGameLogExperienceInfo();
@@ -57,6 +57,13 @@ public class WarService {
             var unitsResults = this.logUnitsAfterWar(beforeAvailableUnits, afterAvailableUnits);
             battleOutcome = new BattleOutcome(true, resourcesResults, unitsResults);
 
+            if (battleOutcome.unitsLost() == 0){
+                log.info("Repeat attack opponents, because unitLost=0 in previous attack");
+                opponentsCampActions.attackOpponentsCamp();
+                resourcesResults = this.logResourcesAfterWar(beforeCampResources, afterCampResources);
+                unitsResults = this.logUnitsAfterWar(beforeAvailableUnits, afterAvailableUnits);
+                battleOutcome = new BattleOutcome(true, resourcesResults, unitsResults);
+            }
             yourCampActions.recruitSoldiers();
 
         } else {

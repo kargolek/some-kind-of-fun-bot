@@ -9,6 +9,7 @@ import org.openqa.selenium.support.locators.RelativeLocator;
 import pl.kargolek.pages.game.details.BaseDetailViewPage;
 import pl.kargolek.pages.game.modal.ReviewRecruitmentModalPage;
 import pl.kargolek.pages.game.modal.SoldierQueueModalPage;
+import pl.kargolek.process.enums.Building;
 import pl.kargolek.process.enums.Soldier;
 import pl.kargolek.util.TestProperty;
 
@@ -34,8 +35,8 @@ public class YourCampDetailPage extends BaseDetailViewPage {
     }
 
     @Override
-    public String extractHeaderTextPattern() {
-        return "Barracks";
+    public Building getBuildingType() {
+        return Building.BARRACKS;
     }
 
     public String getSlotsOccupiedText() {

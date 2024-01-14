@@ -3,6 +3,7 @@ package pl.kargolek.pages.game.details.buildings;
 import org.openqa.selenium.WebDriver;
 import pl.kargolek.pages.BasePage;
 import pl.kargolek.pages.game.details.BaseDetailViewPage;
+import pl.kargolek.process.enums.Building;
 import pl.kargolek.util.TestProperty;
 
 /**
@@ -21,7 +22,8 @@ public class SenateDetailViewPage extends BaseDetailViewPage {
     }
 
     @Override
-    public String extractHeaderTextPattern() {
-        return "Senate";
+    public Building getBuildingType() {
+        return Building.SENATE;
     }
+
 }

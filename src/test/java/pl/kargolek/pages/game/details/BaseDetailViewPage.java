@@ -40,7 +40,7 @@ public abstract class BaseDetailViewPage extends BasePage implements BuildingDet
 
     @Override
     public String getHeaderText() {
-        var xpath = String.format("//h1[contains(text(), '%s')]", extractHeaderTextPattern());
+        var xpath = String.format("//h1[contains(text(), '%s')]", getBuildingType().getName());
         return waitForElementVisibility(By.xpath(xpath), getTimeoutDefault())
                 .getText();
     }
