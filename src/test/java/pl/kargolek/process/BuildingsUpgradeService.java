@@ -32,9 +32,9 @@ public class BuildingsUpgradeService {
                 var filteredBuildingsPage =
                         getFilteredBuildingPageable(currentBuildingLevels, maxBuildingLevels);
 
-                log.info("Filtered building pages: {}", filteredBuildingsPage.stream()
+                log.info("Buildings can be upgrade: {}", filteredBuildingsPage.stream()
                         .map(buildingDetailsPageable -> buildingDetailsPageable.getBuildingType().getName())
-                        .collect(Collectors.joining(" ")));
+                        .collect(Collectors.joining(", ")));
 
                 return filteredBuildingsPage
                         .stream()
@@ -77,7 +77,6 @@ public class BuildingsUpgradeService {
     private boolean isCurrentLevelBelowMaxAboveSenateLevel(int currentLevel,
                                                            int senateLevel,
                                                            int maxLevel) {
-        log.info("Current level:{}, Senate Level:{}, Max Level: {}", currentLevel, senateLevel, maxLevel);
         return (currentLevel - senateLevel) < maxLevel;
     }
 }
