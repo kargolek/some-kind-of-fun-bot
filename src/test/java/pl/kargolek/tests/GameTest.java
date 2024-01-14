@@ -104,6 +104,21 @@ public class GameTest {
         testWarProcedure(System.getenv("SEC_PHRASE_7"), password, "test war 7", 0.4);
     }
 
+    @Test
+    public void test_war_8() throws InterruptedException {
+        testWarProcedure(System.getenv("SEC_PHRASE_8"), password, "test war 8", 0.4);
+    }
+
+    @Test
+    public void test_war_9() throws InterruptedException {
+        testWarProcedure(System.getenv("SEC_PHRASE_9"), password, "test war 9", 0.4);
+    }
+
+    @Test
+    public void test_war_10() throws InterruptedException {
+        testWarProcedure(System.getenv("SEC_PHRASE_10"), password, "test war 10", 0.4);
+    }
+
     private void testWarProcedure(String phrase, String password, String warName, double minResourceRatio)
             throws InterruptedException {
         log.info("Starting {}", warName);

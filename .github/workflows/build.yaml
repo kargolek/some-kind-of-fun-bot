@@ -9,6 +9,9 @@ env:
   SEC_PHRASE_5: ${{ secrets.SEC_PHRASE_5 }}
   SEC_PHRASE_6: ${{ secrets.SEC_PHRASE_6 }}
   SEC_PHRASE_7: ${{ secrets.SEC_PHRASE_7 }}
+  SEC_PHRASE_8: ${{ secrets.SEC_PHRASE_8 }}
+  SEC_PHRASE_9: ${{ secrets.SEC_PHRASE_9 }}
+  SEC_PHRASE_10: ${{ secrets.SEC_PHRASE_10 }}
   SEC_PASSWORD: ${{ secrets.SEC_PASSWORD }}
   SEC_GAME_URL: ${{ secrets.SEC_GAME_URL }}
   SEC_GAME_URL_CAMP: ${{ secrets.SEC_GAME_URL_CAMP }}
