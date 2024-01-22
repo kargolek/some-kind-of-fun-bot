@@ -60,7 +60,7 @@ public class GameTest {
 
         summary = new Summary();
 
-        maxBuildingLevels = getMaxBuildingLevels(9, 9, 9, 1, 9, 9, 2,
+        maxBuildingLevels = setMaxBuildingLevels(9, 9, 9, 1, 9, 9, 4,
                 1, 1);
     }
 
@@ -76,61 +76,61 @@ public class GameTest {
 
     @Test
     public void test_war_1() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE"), password, "test war 1", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE"), password, "test war 1", 0.5,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_2() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_2"), password, "test war 2", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE_2"), password, "test war 2", 0.5,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_3() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_3"), password, "test war 3", 0.4,
+        testWarProcedure(System.getenv("SEC_PHRASE_3"), password, "test war 3", 0.5,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_4() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_4"), password, "test war 4", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE_4"), password, "test war 4", 0.6,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_5() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_5"), password, "test war 5", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE_5"), password, "test war 5", 0.6,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_6() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_6"), password, "test war 6", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE_6"), password, "test war 6", 0.6,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_7() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_7"), password, "test war 7", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE_7"), password, "test war 7", 0.6,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_8() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_8"), password, "test war 8", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE_8"), password, "test war 8", 0.6,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_9() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_9"), password, "test war 9", 0.3,
+        testWarProcedure(System.getenv("SEC_PHRASE_9"), password, "test war 9", 0.6,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_10() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_10"), password, "test war 10", 0.4,
+        testWarProcedure(System.getenv("SEC_PHRASE_10"), password, "test war 10", 0.6,
                 maxBuildingLevels);
     }
 
@@ -166,7 +166,7 @@ public class GameTest {
         summary.setBuildingsQueue(buildingsQueue);
     }
 
-    private List<BuildingLevel> getMaxBuildingLevels(int academy, int barracks, int goldmine, int market, int quarry,
+    private List<BuildingLevel> setMaxBuildingLevels(int academy, int barracks, int goldmine, int market, int quarry,
                                                      int timber, int treasury, int temple, int wall) {
 
         return List.of(new BuildingLevel(Building.ACADEMY, academy),
