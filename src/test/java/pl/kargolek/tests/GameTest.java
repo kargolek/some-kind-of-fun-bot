@@ -60,7 +60,7 @@ public class GameTest {
 
         summary = new Summary();
 
-        maxBuildingLevels = setMaxBuildingLevels(9, 9, 9, 1, 9, 9, 4,
+        maxBuildingLevels = setMaxBuildingLevels(9, 9, 9, 1, 9, 9, 9,
                 1, 1);
     }
 
