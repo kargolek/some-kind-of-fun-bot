@@ -25,4 +25,8 @@ public class GameService {
         log.info("Connect to wallet service has been complete");
     }
 
+    public void runLotteryProcess(){
+        gameActions.runTheaterLottery();
+    }
+
 }

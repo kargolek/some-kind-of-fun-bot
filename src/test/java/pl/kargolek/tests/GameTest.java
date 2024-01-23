@@ -90,6 +90,7 @@ public class GameTest {
     public void test_war_3() throws InterruptedException {
         testWarProcedure(System.getenv("SEC_PHRASE_3"), password, "test war 3", 0.5,
                 maxBuildingLevels);
+        gameService.runLotteryProcess();
     }
 
     @Test

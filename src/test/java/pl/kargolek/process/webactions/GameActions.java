@@ -102,4 +102,14 @@ public class GameActions extends WebActions {
         barracksDetailsPage.waitForTitleDetailViewHeader("barracks", "Barracks");
         return barracksDetailsPage;
     }
+
+    public void runTheaterLottery(){
+        tabSwitchToGame();
+        initPages.getGameMainPage()
+                .open()
+                .getSideNavigationPage()
+                .clickTheatreButton()
+                .clickSpinButtonIfEnable();
+    }
+
 }

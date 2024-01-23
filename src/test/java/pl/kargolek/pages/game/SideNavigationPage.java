@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pl.kargolek.pages.BasePage;
 import pl.kargolek.pages.game.details.buildings.OpponentsCampPage;
+import pl.kargolek.pages.game.details.buildings.TheatreDetailViewPage;
 import pl.kargolek.pages.game.details.buildings.TreasuryDetailViewPage;
 import pl.kargolek.pages.game.details.buildings.YourCampDetailPage;
 import pl.kargolek.pages.game.modal.BuildingQueueModalPage;
@@ -49,6 +50,10 @@ public class SideNavigationPage extends BasePage {
     @FindBy(xpath = "//ul//div[text()='Building Queue']")
     private WebElement buildingQueueButton;
 
+
+    @FindBy(xpath = "//ul//div[text()='Amphitheatre']")
+    private WebElement theatreButton;
+
     public SideNavigationPage(WebDriver driver) {
         super(driver);
     }
@@ -83,5 +88,12 @@ public class SideNavigationPage extends BasePage {
                 .click();
         Thread.sleep(2000);
         return new BuildingQueueModalPage(driver);
+    }
+
+    public TheatreDetailViewPage clickTheatreButton(){
+        this.waitForElementPresent(By.cssSelector(".loaderContainerDisplayNone"), getTimeoutDefault());
+        this.waitForElementClickable(theatreButton, getTimeout5Sec())
+                .click();
+        return new TheatreDetailViewPage(driver);
     }
 }
