@@ -1,7 +1,10 @@
 package pl.kargolek.tests;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pl.kargolek.extension.driver.SeleniumWebDriver;
 import pl.kargolek.extension.javascript.JavascriptDriverExecutor;
 import pl.kargolek.extension.pages.InitPageObject;
@@ -83,7 +86,6 @@ public class GameTest {
                 maxBuildingLevels);
     }
 
-    @Disabled
     @Test
     public void test_war_3() throws InterruptedException {
         testWarProcedure(System.getenv("SEC_PHRASE_3"), password, "test war 3", 0.5,
