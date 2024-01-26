@@ -119,19 +119,19 @@ public class GameTest {
 
     @Test
     public void test_war_8() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_8"), password, "test war 8", 0.6,
+        testWarProcedure(System.getenv("SEC_PHRASE_8"), password, "test war 8", 0.7,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_9() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_9"), password, "test war 9", 0.6,
+        testWarProcedure(System.getenv("SEC_PHRASE_9"), password, "test war 9", 0.7,
                 maxBuildingLevels);
     }
 
     @Test
     public void test_war_10() throws InterruptedException {
-        testWarProcedure(System.getenv("SEC_PHRASE_10"), password, "test war 10", 0.6,
+        testWarProcedure(System.getenv("SEC_PHRASE_10"), password, "test war 10", 0.7,
                 maxBuildingLevels);
     }
 
