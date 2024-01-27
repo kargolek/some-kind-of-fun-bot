@@ -67,6 +67,8 @@ public class YourCampActions extends WebActions {
         var hoplite = yourCampDetailPage.getAmountSoldierText(Soldier.Hoplite);
         var archer = yourCampDetailPage.getAmountSoldierText(Soldier.Archer);
         var cavalry = yourCampDetailPage.getAmountSoldierText(Soldier.Cavalry);
-        return militia + acolyte + slinger + (hoplite * 2) + archer + (cavalry * 3);
+        var minotaur = yourCampDetailPage.getAmountSoldierText(Soldier.Minotaur);
+        var centaur = yourCampDetailPage.getAmountSoldierText(Soldier.Centaur);
+        return militia + acolyte + slinger + (hoplite * 2) + archer + (cavalry * 3) + (minotaur * 4) + (centaur * 4);
     }
 }
